@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Préparer Son Tournage</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07070F;--bg2:#0C0C1C;--card:#101020;--border:#1C1C32;
+  --gold:#F2A900;--red:#E63946;--blue:#4EA8DE;--green:#52B788;--purple:#C77DFF;
+  --text:#E8E4DC;--muted:#6B6B90;--hi:#14142A;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;}
+
+/* FILMSTRIP */
+.filmstrip{position:fixed;top:0;left:0;right:0;height:22px;background:var(--gold);z-index:100;display:flex;align-items:center;overflow:hidden;gap:4px;padding:0 6px;}
+.fh{width:12px;height:15px;background:var(--bg);border-radius:2px;flex-shrink:0;}
+
+/* SIDEBAR */
+.sb{position:fixed;left:0;top:22px;bottom:0;width:48px;background:var(--bg2);border-right:1px solid var(--border);z-index:50;display:flex;flex-direction:column;transition:width 0.3s cubic-bezier(.4,0,.2,1);overflow:hidden;}
+.sb.open{width:192px;}
+.sbtog{width:100%;padding:13px 0;display:flex;align-items:center;justify-content:center;cursor:pointer;border-bottom:1px solid var(--border);color:var(--muted);font-size:15px;transition:color .2s;flex-shrink:0;}
+.sbtog:hover{color:var(--gold);}
+.sb.open .sbtog{justify-content:flex-end;padding-right:14px;}
+.nv{display:flex;align-items:center;padding:9px 0;cursor:pointer;transition:all .2s;border-left:3px solid transparent;color:var(--muted);white-space:nowrap;overflow:hidden;flex-shrink:0;}
+.nv:hover{color:var(--text);background:var(--hi);}
+.nv.on{color:var(--gold);border-left-color:var(--gold);background:rgba(242,169,0,.07);}
+.nv-n{font-family:'Bebas Neue',sans-serif;font-size:16px;min-width:48px;text-align:center;flex-shrink:0;}
+.nv-l{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;opacity:0;transition:opacity .2s .1s;}
+.sb.open .nv-l{opacity:1;}
+
+/* PROGRESS + COUNTER */
+.pb{position:fixed;bottom:0;left:0;right:0;height:3px;background:var(--border);z-index:50;}
+.pf{height:100%;background:var(--gold);transition:width .4s ease;}
+.ctr{position:fixed;bottom:13px;right:90px;font-family:'Bebas Neue',sans-serif;font-size:14px;color:var(--muted);letter-spacing:3px;z-index:60;}
+
+/* SLIDES */
+.sw{position:fixed;top:22px;left:48px;right:0;bottom:3px;overflow:hidden;transition:left .3s cubic-bezier(.4,0,.2,1);}
+.sw.open{left:192px;}
+.slide{position:absolute;inset:0;padding:36px 52px;overflow-y:auto;opacity:0;transform:translateX(40px);transition:all .4s cubic-bezier(.4,0,.2,1);pointer-events:none;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+.slide.active{opacity:1;transform:translateX(0);pointer-events:all;}
+.slide.prev{opacity:0;transform:translateX(-40px);}
+
+/* ARROWS */
+.snav{position:fixed;right:16px;bottom:12px;display:flex;gap:7px;z-index:60;}
+.sbtn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.sbtn:hover{background:var(--gold);color:var(--bg);border-color:var(--gold);}
+
+/* TYPO */
+.tag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;}
+h1.big{font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:.9;letter-spacing:2px;margin-bottom:12px;}
+h2.ttl{font-family:'Bebas Neue',sans-serif;font-size:44px;line-height:.95;letter-spacing:2px;margin-bottom:14px;}
+.sub{font-size:14px;font-weight:300;color:var(--muted);line-height:1.6;}
+p{font-size:12px;line-height:1.7;color:var(--muted);margin-bottom:8px;}
+p strong{color:var(--text);}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+
+/* CARD */
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;}
+.card-g{border-color:rgba(242,169,0,.3);background:rgba(242,169,0,.04);}
+.card-r{border-color:rgba(230,57,70,.3);background:rgba(230,57,70,.04);}
+.card-b{border-color:rgba(78,168,222,.3);background:rgba(78,168,222,.04);}
+.card-gr{border-color:rgba(82,183,136,.3);background:rgba(82,183,136,.04);}
+.card-p{border-color:rgba(199,125,255,.3);background:rgba(199,125,255,.04);}
+
+/* BADGE */
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.5px;}
+.bg{background:rgba(242,169,0,.18);color:var(--gold);}
+.br{background:rgba(230,57,70,.18);color:var(--red);}
+.bb{background:rgba(78,168,222,.15);color:var(--blue);}
+.bgr{background:rgba(82,183,136,.15);color:var(--green);}
+.bp{background:rgba(199,125,255,.15);color:var(--purple);}
+
+/* INFO BOX */
+.ibox{border-left:3px solid var(--gold);padding:11px 15px;background:rgba(242,169,0,.04);border-radius:0 6px 6px 0;font-size:12px;line-height:1.7;color:var(--muted);}
+.ibox strong{color:var(--text);}
+.ibox.r{border-left-color:var(--red);background:rgba(230,57,70,.04);}
+.ibox.gr{border-left-color:var(--green);background:rgba(82,183,136,.04);}
+.ibox.b{border-left-color:var(--blue);background:rgba(78,168,222,.04);}
+
+/* DOC LINK */
+.doc-link{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:6px;border:1px solid var(--border);background:var(--hi);color:var(--muted);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:all .2s;}
+.doc-link:hover{border-color:var(--gold);color:var(--gold);background:rgba(242,169,0,.07);}
+
+/* EQUATION */
+.eq{display:flex;align-items:center;justify-content:center;gap:16px;margin:20px 0;flex-wrap:wrap;}
+.eq-el{text-align:center;padding:16px 20px;border-radius:12px;min-width:110px;}
+.eq-ico{font-size:40px;margin-bottom:6px;}
+.eq-ttl{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;}
+.eq-sub{font-size:10px;color:var(--muted);margin-top:2px;}
+.eq-op{font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--muted);opacity:.4;}
+
+/* MIND MAP */
+.mmap{position:relative;width:100%;height:320px;}
+.mm-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--gold);color:var(--bg);border-radius:50%;width:90px;height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;line-height:1.2;z-index:3;box-shadow:0 0 30px rgba(242,169,0,.35);}
+@keyframes pulse{0%,100%{box-shadow:0 0 30px rgba(242,169,0,.3)}50%{box-shadow:0 0 50px rgba(242,169,0,.6)}}
+.mm-center{animation:pulse 2.5s ease-in-out infinite;}
+.mm-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;}
+.mm-node{position:absolute;z-index:3;cursor:pointer;}
+.mm-box{padding:9px 13px;border-radius:8px;font-size:11px;font-weight:700;letter-spacing:.5px;text-align:center;line-height:1.3;transition:all .25s;border:1px solid;display:flex;flex-direction:column;gap:3px;}
+.mm-node:hover .mm-box,.mm-node.on .mm-box{transform:scale(1.06);filter:brightness(1.3);}
+.mm-ico{font-size:20px;}
+.mm-lbl{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.mm-sub{font-size:9px;font-weight:400;opacity:.7;line-height:1.3;}
+.mm-detail{background:var(--hi);border:1px solid var(--border);border-radius:8px;padding:14px 18px;font-size:12px;line-height:1.7;color:var(--muted);min-height:60px;border-left:3px solid var(--gold);}
+.mm-detail strong{color:var(--text);}
+.mm-detail .mm-go{display:inline-block;margin-top:8px;padding:5px 12px;border-radius:5px;background:rgba(242,169,0,.15);color:var(--gold);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:1px solid rgba(242,169,0,.3);transition:all .2s;}
+.mm-go:hover{background:rgba(242,169,0,.3);}
+
+/* DECOR BLOCKS */
+.dblocks{display:flex;gap:10px;margin:14px 0;}
+.dblock{flex:1;border-radius:8px;padding:14px;border:1px solid;text-align:center;}
+.dblock-ico{font-size:28px;margin-bottom:6px;}
+.dblock-ttl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.dblock-items{display:flex;flex-direction:column;gap:4px;}
+.dblock-item{font-size:11px;padding:4px 8px;background:rgba(255,255,255,.04);border-radius:4px;color:var(--muted);}
+
+/* SHOT STRIP */
+.shots{display:flex;gap:8px;margin:14px 0;overflow-x:auto;padding-bottom:4px;}
+.shot{flex-shrink:0;border-radius:8px;background:var(--card);border:1px solid var(--border);padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;width:100px;}
+.shot:hover,.shot.on{border-color:var(--gold);background:rgba(242,169,0,.07);}
+.shot-frame{margin:0 auto 7px;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:16px;border-radius:3px;}
+.shot-ttl{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:1px;color:var(--text);}
+.shot-sub{font-size:9px;color:var(--muted);margin-top:2px;}
+
+/* FLOOR PLAN */
+.floor{position:relative;background:var(--hi);border-radius:10px;padding:16px;height:220px;border:1px solid var(--border);}
+.fi{position:absolute;text-align:center;}
+.fi-ico{font-size:24px;}
+.fi-lbl{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:2px;}
+
+/* STEP CHAIN */
+.stepchain{display:flex;gap:0;margin:18px 0;}
+.sc-el{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;}
+.sc-el:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:14px;font-size:16px;color:var(--gold);}
+.sc-n{width:36px;height:36px;border-radius:50%;background:var(--gold);color:var(--bg);font-family:'Bebas Neue',sans-serif;font-size:18px;display:flex;align-items:center;justify-content:center;margin-bottom:7px;flex-shrink:0;}
+.sc-t{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text);margin-bottom:3px;}
+.sc-s{font-size:9px;color:var(--muted);line-height:1.4;padding:0 3px;}
+
+/* PIEGE TABS */
+.ptabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:14px;}
+.ptab{padding:7px 14px;border-radius:6px;background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.5px;}
+.ptab:hover{color:var(--text);}
+.ptab.on{border-color:var(--red);color:var(--red);background:rgba(230,57,70,.08);}
+.ptabcnt{display:none;}.ptabcnt.on{display:block;}
+
+/* 180° DIAGRAM */
+.diag-180{border-radius:10px;background:var(--hi);border:1px solid var(--border);overflow:hidden;}
+
+/* CMP */
+.cmp{display:flex;gap:0;border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+.cmp-col{flex:1;padding:16px;}
+.cmp-col:first-child{border-right:1px solid var(--border);}
+.cmp-h{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:2px;margin-bottom:10px;}
+.cmp-r{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--muted);}
+.cmp-r:last-child{border:none;}
+.cmp-r strong{color:var(--text);}
+
+/* CHECKLIST */
+.chk{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:padding-left .2s;}
+.chk:hover{padding-left:6px;}
+.chkb{width:18px;height:18px;border:2px solid var(--border);border-radius:3px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;transition:all .2s;color:transparent;}
+.chkb.on{background:var(--gold);border-color:var(--gold);color:var(--bg);}
+.chk-l{font-size:12px;line-height:1.4;}
+.chk-l strong{color:var(--text);}
+.chk-l span{color:var(--muted);font-size:10px;display:block;margin-top:1px;}
+
+/* BACK TO METHOD PILL */
+.back-pill{
+  position:fixed;top:32px;right:60px;z-index:80;
+  display:none;align-items:center;gap:7px;
+  padding:6px 14px;border-radius:20px;
+  border:1px solid rgba(242,169,0,.4);background:rgba(242,169,0,.1);
+  color:var(--gold);font-size:10px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;cursor:pointer;transition:all .2s;
+}
+.back-pill:hover{background:rgba(242,169,0,.25);}
+.back-pill.vis{display:flex;}
+
+/* PIEGE SHORTCUT */
+.pg-shortcut{
+  display:flex;align-items:center;gap:8px;padding:9px 14px;
+  border-radius:8px;border:1px solid rgba(230,57,70,.35);
+  background:rgba(230,57,70,.07);cursor:pointer;transition:all .2s;
+  font-size:11px;font-weight:700;color:var(--red);letter-spacing:.5px;
+  margin-top:10px;
+}
+.pg-shortcut:hover{background:rgba(230,57,70,.15);}
+
+/* ANIM */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.slide.active .ai{animation:fadeUp .45s ease forwards;opacity:0;}
+.slide.active .ai:nth-child(1){animation-delay:.07s}.slide.active .ai:nth-child(2){animation-delay:.15s}
+.slide.active .ai:nth-child(3){animation-delay:.23s}.slide.active .ai:nth-child(4){animation-delay:.31s}
+.slide.active .ai:nth-child(5){animation-delay:.39s}
+
+/* MISC */
+h3{font-size:14px;font-weight:600;margin-bottom:9px;color:var(--text);}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+/* ═══ RESPONSIVE MOBILE ═══ */
+@media(max-width:768px){
+  html,body{overflow:auto;}
+  .sb{display:none!important;}
+  .sw,.sw.open{left:0!important;position:relative;top:0;bottom:auto;right:auto;height:auto;overflow:visible;}
+  .slide{position:relative;inset:auto;padding:24px 18px;opacity:1!important;transform:none!important;pointer-events:all!important;display:none;}
+  .slide.active{display:block;}
+  .slide.prev{display:none;}
+  .pb{display:none;}
+  .ctr{bottom:auto;top:30px;right:10px;font-size:12px;letter-spacing:2px;}
+  .back-pill{top:30px;right:60px;font-size:9px;padding:4px 10px;}
+  .snav{bottom:auto;top:26px;left:10px;right:auto;}
+  .sbtn{width:32px;height:32px;font-size:13px;}
+  h1.big{font-size:44px;}
+  h2.ttl{font-size:28px;}
+  .sub{font-size:13px;}
+  .g2{grid-template-columns:1fr!important;}
+  .g3{grid-template-columns:1fr!important;}
+  .g4{grid-template-columns:1fr 1fr!important;}
+  .cmp{flex-direction:column;}
+  .cmp-col:first-child{border-right:none;border-bottom:1px solid var(--border);}
+  .stepchain{flex-wrap:wrap;}
+  .sc-el:not(:last-child)::after{display:none;}
+  .mmap{height:240px;}
+  .mm-center{width:72px;height:72px;font-size:10px;}
+  .dblocks{flex-direction:column;}
+  .shots{gap:5px;}
+  .shot{width:72px!important;}
+  .ptabs{gap:4px;}
+  .ptab{padding:5px 9px;font-size:10px;}
+  .diag-180 svg{height:150px;}
+  .hub-n{display:none!important;}
+  #hubsvg2{display:none!important;}
+  #hub-d2{display:none!important;}
+  .floor{height:150px;}
+  .fi-ico{font-size:16px;}
+  .pg-shortcut{padding:7px 10px;}
+  /* Chain tag pills wrap on mobile */
+  div[style*="display:flex;align-items:center;gap:4px"]{flex-wrap:wrap!important;gap:6px!important;}
+}
+</style>
+</head>
+<body>
+<div class="filmstrip" id="fs"></div>
+<div class="back-pill" id="back-pill" onclick="goTo(1)">← La Méthode</div>
+
+<nav class="sb" id="sb">
+  <div class="sbtog" id="sbtog" onclick="toggleSb()">☰</div>
+  <div id="ni"></div>
+</nav>
+
+<div class="pb"><div class="pf" id="pf"></div></div>
+<div class="ctr" id="ctr">01/09</div>
+
+<div class="sw" id="sw">
+
+<!-- ══ SLIDE 1 : CONTEXTE VIDÉO ══ -->
+<div class="slide active" id="s0">
+  <h1 class="big ai">PRÉPARER<br>SON TOURNAGE</h1>
+  <p class="sub ai" style="margin-bottom:20px;">Matériel léger et semi-pro.<br>La méthode du cinéma, adaptée à votre réalité.</p>
+
+  <div class="cmp ai" style="margin-bottom:16px;">
+    <div class="cmp-col" style="background:var(--card);">
+      <div class="cmp-h" style="color:var(--muted);">🎬 Cinéma Pro</div>
+      <div class="cmp-r">🎥 <strong>Chef op-cadreur</strong></div>
+      <div class="cmp-r">🎙️ <strong>Ingénieur du son</strong></div>
+      <div class="cmp-r">💡 <strong>Dir. photographie</strong></div>
+      <div class="cmp-r">📋 <strong>Scripte</strong></div>
+      <div class="cmp-r">🎭 <strong>Metteur en scène</strong></div>
+      <div class="cmp-r">🔧 <strong>Machino-électricien</strong></div>
+    </div>
+    <div class="cmp-col" style="background:rgba(242,169,0,.05);">
+      <div class="cmp-h" style="color:var(--gold);">📱 Vous — On s'adapte !</div>
+      <div class="cmp-r" style="color:var(--text);">🎥 Cadreur <span class="badge bg" style="margin-left:4px;">obligatoire</span></div>
+      <div class="cmp-r" style="color:var(--text);">🎙️ Preneur de son <span class="badge bg" style="margin-left:4px;">obligatoire</span></div>
+      <div class="cmp-r">💡 Lumière <span style="font-size:10px;color:var(--muted);margin-left:4px;">si possible</span></div>
+      <div class="cmp-r">📋 Scripte <span style="font-size:10px;color:var(--muted);margin-left:4px;">si possible</span></div>
+      <div class="cmp-r">🎭 Réalisateur <span style="font-size:10px;color:var(--muted);margin-left:4px;">si possible</span></div>
+      <div class="cmp-r" style="color:var(--muted);">→ Les postes se cumulent intelligemment</div>
+    </div>
+  </div>
+
+  <div class="g3 ai">
+    <div class="card card-g">
+      <div style="font-size:26px;margin-bottom:6px;">📷</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;">Prise de vue</div>
+      <p>Smartphone, caméscope ou hybride. <strong>1080p · 25 i/s · Sur trépied — toujours.</strong></p>
+    </div>
+    <div class="card card-b">
+      <div style="font-size:26px;margin-bottom:6px;">🎙️</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:5px;">Son — LE piège n°1</div>
+      <p>Micro canon ou HF. Casque de contrôle. <strong>48 000 Hz.</strong></p>
+    </div>
+    <div class="card card-gr">
+      <div style="font-size:26px;margin-bottom:6px;">💡</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green);margin-bottom:5px;">Lumière</div>
+      <p>2 LED sur trépied. Diffuser avec <strong>boules chinoises</strong>. Réfléchir avec <strong>pare-soleil voiture</strong>.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;" class="ai">
+    <div onclick="goTo(1)" style="display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:rgba(242,169,0,.12);border:2px solid var(--gold);border-radius:10px;cursor:pointer;transition:all .2s;" onmouseover="this.style.background='rgba(242,169,0,.22)'" onmouseout="this.style.background='rgba(242,169,0,.12)'">
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--gold);">LA MÉTHODOLOGIE</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Séquencier · Scénario · Découpage · Plan de Tournage · Plan au Sol</div>
+      </div>
+      <div style="font-size:28px;color:var(--gold);">→</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 2 : LA MÉTHODE ══ -->
+<div class="slide" id="s1">
+  <div class="g2" style="gap:20px;height:calc(100vh - 80px);align-items:start;">
+    <!-- LEFT: MIND MAP -->
+    <div>
+      
+      <h2 class="ttl" style="font-size:38px;">LA CHAÎNE DE<br>PRÉPARATION</h2>
+      <div class="mmap" id="mmap">
+        <svg class="mm-svg" id="mmsvg" viewBox="0 0 440 320"></svg>
+        <div class="mm-center">🎬<br>TOUR-<br>NAGE</div>
+
+        <!-- Top left: Séquencier -->
+        <div class="mm-node" style="top:8px;left:8px;" onclick="mmClick(0,this)">
+          <div class="mm-box" style="border-color:rgba(242,169,0,.4);color:var(--gold);background:rgba(242,169,0,.08);">
+            <div style="position:absolute;top:-8px;left:-8px;width:20px;height:20px;border-radius:50%;background:var(--gold);color:var(--bg);font-family:'Bebas Neue',sans-serif;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:700;">1</div>
+            <div class="mm-ico">📋</div>
+            <div class="mm-lbl">Séquencier</div>
+            <div class="mm-sub">Lieu + Temps</div>
+          </div>
+        </div>
+        <!-- Top right: Scénario -->
+        <div class="mm-node" style="top:8px;right:8px;" onclick="mmClick(1,this)">
+          <div class="mm-box" style="border-color:rgba(78,168,222,.4);color:var(--blue);background:rgba(78,168,222,.08);position:relative;">
+            <div style="position:absolute;top:-8px;left:-8px;width:20px;height:20px;border-radius:50%;background:var(--blue);color:var(--bg);font-family:'Bebas Neue',sans-serif;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:700;">2</div>
+            <div class="mm-ico">📝</div>
+            <div class="mm-lbl">Scénario</div>
+            <div class="mm-sub">Fil rouge</div>
+          </div>
+        </div>
+        <!-- Mid left: Découpage -->
+        <div class="mm-node" style="top:50%;left:8px;transform:translateY(-50%);" onclick="mmClick(2,this)">
+          <div class="mm-box" style="border-color:rgba(82,183,136,.4);color:var(--green);background:rgba(82,183,136,.08);position:relative;">
+            <div style="position:absolute;top:-8px;left:-8px;width:20px;height:20px;border-radius:50%;background:var(--green);color:var(--bg);font-family:'Bebas Neue',sans-serif;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:700;">3</div>
+            <div class="mm-ico">📐</div>
+            <div class="mm-lbl">Découpage</div>
+            <div class="mm-sub">Plan par plan</div>
+          </div>
+        </div>
+        <!-- Mid right: Plan de tournage -->
+        <div class="mm-node" style="top:50%;right:8px;transform:translateY(-50%);" onclick="mmClick(3,this)">
+          <div class="mm-box" style="border-color:rgba(242,169,0,.4);color:var(--gold);background:rgba(242,169,0,.08);position:relative;">
+            <div style="position:absolute;top:-8px;left:-8px;width:20px;height:20px;border-radius:50%;background:var(--gold);color:var(--bg);font-family:'Bebas Neue',sans-serif;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:700;">4</div>
+            <div class="mm-ico">🗓️</div>
+            <div class="mm-lbl">Plan de Tournage</div>
+            <div class="mm-sub">Logistique décor</div>
+          </div>
+        </div>
+        <!-- Bottom left: Plan au sol -->
+        <div class="mm-node" style="bottom:0;left:8px;" onclick="mmClick(4,this)">
+          <div class="mm-box" style="border-color:rgba(230,57,70,.4);color:var(--red);background:rgba(230,57,70,.08);position:relative;">
+            <div style="position:absolute;top:-8px;left:-8px;width:20px;height:20px;border-radius:50%;background:var(--red);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:700;">5</div>
+            <div class="mm-ico">🗺️</div>
+            <div class="mm-lbl">Plan au Sol</div>
+            <div class="mm-sub">Caméra → Lumière → Son</div>
+          </div>
+        </div>
+        <!-- Bottom right: Matériel -->
+        <div class="mm-node" style="bottom:0;right:8px;" onclick="mmClick(5,this)">
+          <div class="mm-box" style="border-color:rgba(199,125,255,.4);color:var(--purple);background:rgba(199,125,255,.08);position:relative;">
+            <div style="position:absolute;top:-8px;left:-8px;width:20px;height:20px;border-radius:50%;background:var(--purple);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:700;">6</div>
+            <div class="mm-ico">📦</div>
+            <div class="mm-lbl">Matériel</div>
+            <div class="mm-sub">Préparer la veille</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: DETAIL + CHAIN TEXT -->
+    <div style="display:flex;flex-direction:column;gap:12px;padding-top:56px;">
+      <div class="mm-detail" id="mm-detail">
+        👆 <strong>Cliquez sur une étape</strong> pour voir son rôle et naviguer vers la partie correspondante.
+      </div>
+
+      <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:10px;margin-bottom:6px;">Ordre de la chaîne</div>
+      <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px;">
+        <span style="background:rgba(242,169,0,.15);border:1px solid rgba(242,169,0,.4);color:var(--gold);border-radius:5px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;" onclick="goTo(2)">① Séquencier</span>
+        <span style="color:var(--muted);font-size:11px;">→</span>
+        <span style="background:rgba(78,168,222,.12);border:1px solid rgba(78,168,222,.4);color:var(--blue);border-radius:5px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;" onclick="goTo(3)">② Scénario</span>
+        <span style="color:var(--muted);font-size:11px;">→</span>
+        <span style="background:rgba(82,183,136,.12);border:1px solid rgba(82,183,136,.4);color:var(--green);border-radius:5px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;" onclick="goTo(4)">③ Découpage</span>
+        <span style="color:var(--muted);font-size:11px;">→</span>
+        <span style="background:rgba(242,169,0,.1);border:1px solid rgba(242,169,0,.3);color:var(--gold);border-radius:5px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;" onclick="goTo(5)">④ Plan de Tournage</span>
+        <span style="color:var(--muted);font-size:11px;">→</span>
+        <span style="background:rgba(230,57,70,.12);border:1px solid rgba(230,57,70,.4);color:var(--red);border-radius:5px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;" onclick="goTo(6)">⑤ Plan au Sol</span>
+        <span style="color:var(--muted);font-size:11px;">→</span>
+        <span style="background:rgba(199,125,255,.12);border:1px solid rgba(199,125,255,.4);color:var(--purple);border-radius:5px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;" onclick="goTo(7)">⑥ Matériel J-1</span>
+      </div>
+
+      <div class="ibox" style="margin-bottom:8px;">Le séquencier révèle les contraintes. Le scénario est le fil rouge de tout. Le découpage prépare les prises. Le plan de tournage organise les journées. Le plan au sol installe la technique.</div>
+      <div class="ibox r" style="margin-bottom:8px;">En vidéo : même méthode, équipe réduite, même rigueur.</div>
+
+      <div class="pg-shortcut" onclick="goTo(8)">
+        <span style="font-size:18px;">⚡</span>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.5px;">Pièges &amp; Questions des étudiants</div>
+          <div style="font-size:10px;color:rgba(230,57,70,.7);font-weight:400;margin-top:1px;">Son · Règle des 180° · Raccords · Voix hors champ · Impréparation</div>
+        </div>
+        <span style="margin-left:auto;font-size:14px;">→</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 3 : SÉQUENCIER ══ -->
+<div class="slide" id="s2">
+  
+  <h2 class="ttl">LE SÉQUENCIER</h2>
+
+  <div class="eq">
+    <div class="eq-el card-g" style="border:1px solid rgba(242,169,0,.3);">
+      <div class="eq-ico">📍</div><div class="eq-ttl" style="color:var(--gold);">LIEU</div><div class="eq-sub">= le décor</div>
+    </div>
+    <div class="eq-op">+</div>
+    <div class="eq-el card-b" style="border:1px solid rgba(78,168,222,.3);">
+      <div class="eq-ico">⏱️</div><div class="eq-ttl" style="color:var(--blue);">TEMPS</div><div class="eq-sub">= l'éclairage</div>
+    </div>
+    <div class="eq-op">=</div>
+    <div class="eq-el" style="background:rgba(242,169,0,.15);border:2px solid var(--gold);">
+      <div class="eq-ico">🎬</div><div class="eq-ttl" style="color:var(--gold);">SÉQUENCE</div><div class="eq-sub">unité de base</div>
+    </div>
+  </div>
+
+  <div class="dblocks">
+    <div class="dblock" style="border-color:rgba(242,169,0,.3);background:rgba(242,169,0,.04);">
+      <div class="dblock-ico">📍</div>
+      <div class="dblock-ttl" style="color:var(--gold);">LIEU = Décor</div>
+      <div class="dblock-items">
+        <div class="dblock-item">🏠 Intérieur → lumière à créer</div>
+        <div class="dblock-item">🌳 Extérieur → météo, autorisations</div>
+        <div class="dblock-item" style="color:var(--text);">Changement de lieu = nouvelle séquence</div>
+      </div>
+    </div>
+    <div class="dblock" style="border-color:rgba(78,168,222,.3);background:rgba(78,168,222,.04);">
+      <div class="dblock-ico">⏱️</div>
+      <div class="dblock-ttl" style="color:var(--blue);">TEMPS = Éclairage</div>
+      <div class="dblock-items">
+        <div class="dblock-item">☀️ Jour → lumière naturelle</div>
+        <div class="dblock-item">🌙 Nuit/Soir → tout à recréer</div>
+        <div class="dblock-item" style="color:var(--text);">Impacte balance des blancs + expo</div>
+      </div>
+    </div>
+    <div class="dblock card-gr">
+      <div class="dblock-ico">💡</div>
+      <div class="dblock-ttl" style="color:var(--green);">Pourquoi c'est central</div>
+      <div class="dblock-items">
+        <div class="dblock-item">Regroupe les scènes par décor</div>
+        <div class="dblock-item">Évite les allers-retours inutiles</div>
+        <div class="dblock-item" style="color:var(--text);">Base du plan de tournage</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ibox" style="margin-bottom:14px;">
+    <strong>Règle d'or :</strong> on ne tourne pas dans l'ordre du film — on tourne dans l'ordre du <strong>décor</strong>. Le montage reconstituera la narration.
+  </div>
+</div>
+
+<!-- ══ SLIDE 4 : SCÉNARIO ══ -->
+<div class="slide" id="s3">
+  
+  <h2 class="ttl">LE SCÉNARIO</h2>
+  <p class="sub" style="margin-bottom:12px;">Le <span style="color:var(--gold);">fil rouge de tout le projet</span> — de l'écriture au montage.</p>
+
+  <!-- Central SCÉNARIO -->
+  <div style="text-align:center;margin-bottom:12px;">
+    <div style="display:inline-flex;align-items:center;justify-content:center;background:var(--gold);border-radius:50%;width:64px;height:64px;font-size:28px;box-shadow:0 0 24px rgba(242,169,0,.4);">📝</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--gold);margin-top:4px;">SCÉNARIO</div>
+    <div style="font-size:10px;color:var(--muted);">Fil rouge — de l'écriture au montage, tous s'y réfèrent</div>
+  </div>
+
+  <!-- SVG fan lines -->
+  <div style="position:relative;height:18px;margin:0 8px;">
+    <svg viewBox="0 0 600 18" style="width:100%;height:100%;" preserveAspectRatio="none">
+      <!-- Lines from center (300,0) to each of 5 nodes at bottom -->
+      <line x1="300" y1="0" x2="55" y2="18" stroke="rgba(242,169,0,.4)" stroke-width="1.5"/>
+      <line x1="300" y1="0" x2="175" y2="18" stroke="rgba(242,169,0,.4)" stroke-width="1.5"/>
+      <line x1="300" y1="0" x2="300" y2="18" stroke="rgba(242,169,0,.4)" stroke-width="1.5"/>
+      <line x1="300" y1="0" x2="425" y2="18" stroke="rgba(242,169,0,.4)" stroke-width="1.5"/>
+      <line x1="300" y1="0" x2="545" y2="18" stroke="rgba(242,169,0,.4)" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <!-- 5 roles in a horizontal row -->
+  <div style="display:flex;gap:6px;justify-content:stretch;margin-bottom:10px;">
+    <div onclick="hubInfo('comediens')" style="flex:1;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 6px;text-align:center;cursor:pointer;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+      <div style="font-size:20px;margin-bottom:4px;">🎭</div>
+      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text);">Comédiens</div>
+      <div style="font-size:8px;color:var(--muted);margin-top:2px;">Dialogues<br>Intentions</div>
+    </div>
+    <div onclick="hubInfo('real')" style="flex:1;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 6px;text-align:center;cursor:pointer;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+      <div style="font-size:20px;margin-bottom:4px;">🎬</div>
+      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text);">Réalisateur</div>
+      <div style="font-size:8px;color:var(--muted);margin-top:2px;">Cohérence<br>artistique</div>
+    </div>
+    <div onclick="hubInfo('chefop')" style="flex:1;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 6px;text-align:center;cursor:pointer;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+      <div style="font-size:20px;margin-bottom:4px;">📷</div>
+      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text);">Chef Op.</div>
+      <div style="font-size:8px;color:var(--muted);margin-top:2px;">Plans<br>Lumière</div>
+    </div>
+    <div onclick="hubInfo('son')" style="flex:1;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 6px;text-align:center;cursor:pointer;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+      <div style="font-size:20px;margin-bottom:4px;">🎙️</div>
+      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text);">Ingé Son</div>
+      <div style="font-size:8px;color:var(--muted);margin-top:2px;">Ambiances<br>Difficultés</div>
+    </div>
+    <div onclick="hubInfo('monteur')" style="flex:1;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 6px;text-align:center;cursor:pointer;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+      <div style="font-size:20px;margin-bottom:4px;">✂️</div>
+      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text);">Monteur</div>
+      <div style="font-size:8px;color:var(--muted);margin-top:2px;">Projet prévu<br>= rendu final</div>
+    </div>
+  </div>
+
+  <!-- Full-width explanation bar -->
+  <div id="hub-d2" style="width:100%;padding:14px 18px;background:var(--hi);border-radius:8px;border-left:3px solid var(--gold);font-size:13px;color:var(--muted);line-height:1.6;min-height:52px;">
+    👆 Cliquez sur un rôle pour comprendre comment il utilise le scénario.
+  </div>
+
+  <!-- EXEMPLE CONCRET : SCÉNARIO CAMP DES MILLES -->
+  <div style="margin-top:14px;">
+    <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Exemple concret — Scénario "La Mémoire pour Demain" (Camp des Milles)</div>
+    <div style="background:var(--hi);border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+      <div style="display:flex;gap:0;border-bottom:1px solid var(--border);">
+        <div onclick="showScTab(0,this)" id="sct0" style="padding:8px 18px;font-size:11px;font-weight:700;cursor:pointer;border-bottom:2px solid var(--gold);color:var(--gold);letter-spacing:.5px;text-transform:uppercase;">Voir le scénario</div>
+        <div onclick="showScTab(1,this)" id="sct1" style="padding:8px 18px;font-size:11px;font-weight:700;cursor:pointer;border-bottom:2px solid transparent;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;">Ce qu'on y lit</div>
+      </div>
+      <div id="sc-tab0" style="padding:0;">
+        <iframe src="SCENARIO_-_DTVOYAGE_MEMOIRE__CAMP_DES_MILLES.pdf" style="width:100%;height:400px;border:none;display:block;" title="Scénario Camp des Milles"></iframe>
+        <div style="padding:8px 14px;font-size:10px;color:var(--muted);border-top:1px solid var(--border);">⚠️ Si le PDF ne s'affiche pas, placez le fichier dans le même dossier que ce HTML.</div>
+      </div>
+      <div id="sc-tab1" style="display:none;padding:16px 18px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--gold);margin-bottom:7px;">Structure d'une séquence</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.8;">
+              📍 <strong style="color:var(--text);">Intitulé</strong> — Lieu + moment (Int/Ext · Jour/Nuit)<br>
+              🎬 <strong style="color:var(--text);">Description</strong> — Ce que voit le spectateur<br>
+              💬 <strong style="color:var(--text);">Dialogues</strong> — Écrits au présent, centrés<br>
+              🎙️ <strong style="color:var(--text);">Indications son</strong> — Voix off, ambiance, musique<br>
+              ✂️ <strong style="color:var(--text);">Plans de coupe</strong> — Images d'illustration prévues
+            </div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--gold);margin-bottom:7px;">Ce scénario en chiffres</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.8;">
+              9 séquences · 30 plans<br>
+              5 minutes de film max<br>
+              Tournage documentaire<br>
+              <br>
+              Chaque interviewé est <strong style="color:var(--text);">identifié avec ses questions</strong> et les éléments de réponse attendus — le fil rouge de tout le tournage.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:12px;">
+  </div>
+</div>
+
+<!-- ══ SLIDE 5 : DÉCOUPAGE TECH ══ -->
+<div class="slide" id="s4">
+  
+  <h2 class="ttl">LE DÉCOUPAGE<br>TECHNIQUE</h2>
+  <p class="sub" style="margin-bottom:10px;">Plan par plan — <span style="color:var(--gold);">~12 plans par minute</span>. Il détermine directement le plan au sol.</p>
+
+  <!-- RAPPEL VALEURS DE PLAN - BD STYLE -->
+  <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Rappel — Valeurs de plan (style BD)</div>
+  <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:6px;">
+
+    <!-- PLAN LARGE -->
+    <div onclick="showShot(0,this)" style="flex-shrink:0;cursor:pointer;text-align:center;border-radius:8px;border:2px solid var(--border);padding:6px;transition:all .2s;background:var(--card);" class="shot-card">
+      <svg viewBox="0 0 130 85" width="130" height="85" style="display:block;border-radius:3px;">
+        <rect width="130" height="85" fill="#080D14"/>
+        <rect y="0" width="130" height="46" fill="#0A1520"/>
+        <rect y="46" width="130" height="39" fill="#060A04"/>
+        <rect x="8" y="25" width="5" height="21" fill="#1A4D2E"/><polygon points="10,7 5,25 15,25" fill="#2D6A4F"/>
+        <rect x="117" y="25" width="5" height="21" fill="#1A4D2E"/><polygon points="120,7 115,25 125,25" fill="#2D6A4F"/>
+        <!-- Tiny figure -->
+        <ellipse cx="65" cy="40" rx="3" ry="3.5" fill="#E8E4DC" stroke="#E8E4DC" stroke-width=".5"/>
+        <rect x="62" y="43" width="6" height="7" rx="1" fill="#E8E4DC"/>
+        <line x1="62" y1="47" x2="59" y2="50" stroke="#E8E4DC" stroke-width="1.5"/>
+        <line x1="68" y1="47" x2="71" y2="50" stroke="#E8E4DC" stroke-width="1.5"/>
+        <line x1="63" y1="50" x2="62" y2="55" stroke="#E8E4DC" stroke-width="1.5"/>
+        <line x1="67" y1="50" x2="68" y2="55" stroke="#E8E4DC" stroke-width="1.5"/>
+        <!-- Ground -->
+        <line x1="0" y1="58" x2="130" y2="58" stroke="#1C1C32" stroke-width="1"/>
+        <!-- Frame -->
+        <rect x="1" y="1" width="128" height="83" fill="none" stroke="#F2A900" stroke-width="2.5" rx="2"/>
+      </svg>
+      <div style="font-size:10px;font-weight:700;color:var(--text);margin-top:5px;">Plan Large</div>
+      <div style="font-size:8px;color:var(--muted);">Décor entier</div>
+    </div>
+
+    <!-- PLAN MOYEN -->
+    <div onclick="showShot(1,this)" style="flex-shrink:0;cursor:pointer;text-align:center;border-radius:8px;border:2px solid var(--border);padding:6px;transition:all .2s;background:var(--card);" class="shot-card">
+      <svg viewBox="0 0 75 120" width="75" height="120" style="display:block;border-radius:3px;">
+        <rect width="75" height="120" fill="#07070F"/>
+        <!-- Full body BD figure -->
+        <ellipse cx="37" cy="16" rx="10" ry="12" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="2"/>
+        <circle cx="33" cy="14" r="1.5" fill="#E8E4DC"/><circle cx="41" cy="14" r="1.5" fill="#E8E4DC"/>
+        <path d="M33,20 Q37,24 42,20" fill="none" stroke="#E8E4DC" stroke-width="1.5"/>
+        <!-- Torso -->
+        <path d="M26,29 Q37,26 49,29 L47,72 Q37,75 28,72 Z" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="2"/>
+        <!-- Arms -->
+        <path d="M27,36 Q18,52 15,66" fill="none" stroke="#E8E4DC" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M48,36 Q57,52 60,66" fill="none" stroke="#E8E4DC" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Legs -->
+        <path d="M33,72 Q30,90 28,110" fill="none" stroke="#E8E4DC" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M42,72 Q45,90 47,110" fill="none" stroke="#E8E4DC" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="28" y1="110" x2="19" y2="113" stroke="#E8E4DC" stroke-width="2" stroke-linecap="round"/>
+        <line x1="47" y1="110" x2="56" y2="113" stroke="#E8E4DC" stroke-width="2" stroke-linecap="round"/>
+        <!-- Frame full -->
+        <rect x="1" y="1" width="73" height="118" fill="none" stroke="#F2A900" stroke-width="2.5" rx="2"/>
+      </svg>
+      <div style="font-size:10px;font-weight:700;color:var(--text);margin-top:5px;">Plan Moyen</div>
+      <div style="font-size:8px;color:var(--muted);">Corps entier</div>
+    </div>
+
+    <!-- PLAN AMÉRICAIN -->
+    <div onclick="showShot(2,this)" style="flex-shrink:0;cursor:pointer;text-align:center;border-radius:8px;border:2px solid var(--border);padding:6px;transition:all .2s;background:var(--card);" class="shot-card">
+      <svg viewBox="0 0 75 120" width="75" height="120" style="display:block;border-radius:3px;">
+        <rect width="75" height="120" fill="#07070F"/>
+        <!-- Same figure - visible part only in frame -->
+        <ellipse cx="37" cy="16" rx="10" ry="12" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="2"/>
+        <circle cx="33" cy="14" r="1.5" fill="#E8E4DC"/><circle cx="41" cy="14" r="1.5" fill="#E8E4DC"/>
+        <path d="M33,20 Q37,24 42,20" fill="none" stroke="#E8E4DC" stroke-width="1.5"/>
+        <path d="M26,29 Q37,26 49,29 L47,72 Q37,75 28,72 Z" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="2"/>
+        <path d="M27,36 Q18,52 15,66" fill="none" stroke="#E8E4DC" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M48,36 Q57,52 60,66" fill="none" stroke="#E8E4DC" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Legs visible only to mid-thigh -->
+        <path d="M33,72 Q31,82 30,88" fill="none" stroke="#E8E4DC" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M42,72 Q44,82 45,88" fill="none" stroke="#E8E4DC" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Muted below cut -->
+        <path d="M30,88 Q28,100 28,110" fill="none" stroke="#E8E4DC" stroke-width="2" opacity=".15"/>
+        <path d="M45,88 Q47,100 47,110" fill="none" stroke="#E8E4DC" stroke-width="2" opacity=".15"/>
+        <line x1="28" y1="110" x2="19" y2="113" stroke="#E8E4DC" stroke-width="2" opacity=".1"/>
+        <line x1="47" y1="110" x2="56" y2="113" stroke="#E8E4DC" stroke-width="2" opacity=".1"/>
+        <!-- Cut line -->
+        <line x1="0" y1="90" x2="75" y2="90" stroke="#E63946" stroke-width="2" stroke-dasharray="5,3"/>
+        <!-- Frame -->
+        <rect x="1" y="1" width="73" height="89" fill="none" stroke="#F2A900" stroke-width="2.5" rx="2"/>
+        <text x="37" y="101" text-anchor="middle" fill="#E63946" font-size="7" font-family="sans-serif">↑ mi-cuisse</text>
+      </svg>
+      <div style="font-size:10px;font-weight:700;color:var(--text);margin-top:5px;">Plan Américain</div>
+      <div style="font-size:8px;color:var(--muted);">Mi-cuisse</div>
+    </div>
+
+    <!-- PLAN ÉPAULE -->
+    <div onclick="showShot(3,this)" style="flex-shrink:0;cursor:pointer;text-align:center;border-radius:8px;border:2px solid var(--border);padding:6px;transition:all .2s;background:var(--card);" class="shot-card">
+      <svg viewBox="0 0 75 120" width="75" height="120" style="display:block;border-radius:3px;">
+        <rect width="75" height="120" fill="#07070F"/>
+        <ellipse cx="37" cy="16" rx="10" ry="12" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="2"/>
+        <circle cx="33" cy="14" r="1.5" fill="#E8E4DC"/><circle cx="41" cy="14" r="1.5" fill="#E8E4DC"/>
+        <path d="M33,20 Q37,24 42,20" fill="none" stroke="#E8E4DC" stroke-width="1.5"/>
+        <!-- Torso only to chest -->
+        <path d="M26,29 Q37,26 49,29 L48,52 Q37,54 27,52 Z" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="2"/>
+        <path d="M27,36 Q22,45 20,52" fill="none" stroke="#E8E4DC" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M48,36 Q53,45 55,52" fill="none" stroke="#E8E4DC" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Muted below -->
+        <path d="M27,52 L28,72" fill="none" stroke="#E8E4DC" stroke-width="2" opacity=".12"/>
+        <path d="M48,52 L47,72" fill="none" stroke="#E8E4DC" stroke-width="2" opacity=".12"/>
+        <path d="M20,52 L15,66" fill="none" stroke="#E8E4DC" stroke-width="2" opacity=".12"/>
+        <path d="M55,52 L60,66" fill="none" stroke="#E8E4DC" stroke-width="2" opacity=".12"/>
+        <path d="M33,72 L28,110" fill="none" stroke="#E8E4DC" stroke-width="2" opacity=".08"/>
+        <path d="M42,72 L47,110" fill="none" stroke="#E8E4DC" stroke-width="2" opacity=".08"/>
+        <!-- Cut line -->
+        <line x1="0" y1="54" x2="75" y2="54" stroke="#E63946" stroke-width="2" stroke-dasharray="5,3"/>
+        <rect x="1" y="1" width="73" height="53" fill="none" stroke="#F2A900" stroke-width="2.5" rx="2"/>
+        <text x="37" y="66" text-anchor="middle" fill="#E63946" font-size="7" font-family="sans-serif">↑ épaules</text>
+      </svg>
+      <div style="font-size:10px;font-weight:700;color:var(--text);margin-top:5px;">Plan Épaule</div>
+      <div style="font-size:8px;color:var(--muted);">Poitrine/épaules</div>
+    </div>
+
+    <!-- GROS PLAN -->
+    <div onclick="showShot(4,this)" style="flex-shrink:0;cursor:pointer;text-align:center;border-radius:8px;border:2px solid var(--border);padding:6px;transition:all .2s;background:var(--card);" class="shot-card">
+      <svg viewBox="0 0 75 90" width="75" height="90" style="display:block;border-radius:3px;">
+        <rect width="75" height="90" fill="#07070F"/>
+        <!-- Large face -->
+        <ellipse cx="37" cy="40" rx="26" ry="30" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="2.5"/>
+        <!-- Eyes -->
+        <ellipse cx="27" cy="34" rx="5" ry="6" fill="#07070F" stroke="#E8E4DC" stroke-width="1.5"/>
+        <ellipse cx="47" cy="34" rx="5" ry="6" fill="#07070F" stroke="#E8E4DC" stroke-width="1.5"/>
+        <circle cx="28" cy="34" r="2" fill="#E8E4DC"/><circle cx="48" cy="34" r="2" fill="#E8E4DC"/>
+        <!-- Eyebrows -->
+        <path d="M22,27 Q27,23 32,27" fill="none" stroke="#E8E4DC" stroke-width="2"/>
+        <path d="M42,27 Q47,23 52,27" fill="none" stroke="#E8E4DC" stroke-width="2"/>
+        <!-- Nose -->
+        <path d="M37,36 Q34,46 32,48 Q37,50 42,48 Q40,46 37,36" fill="none" stroke="#E8E4DC" stroke-width="1.5"/>
+        <!-- Mouth -->
+        <path d="M28,60 Q37,66 46,60" fill="none" stroke="#E8E4DC" stroke-width="2.5"/>
+        <!-- Hair hint -->
+        <path d="M11,30 Q8,12 37,8 Q66,12 63,30" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="2"/>
+        <!-- Neck/shoulders hint -->
+        <path d="M18,70 Q18,88 22,90 L52,90 Q56,88 56,70" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="2"/>
+        <rect x="1" y="1" width="73" height="88" fill="none" stroke="#F2A900" stroke-width="2.5" rx="2"/>
+      </svg>
+      <div style="font-size:10px;font-weight:700;color:var(--text);margin-top:5px;">Gros Plan</div>
+      <div style="font-size:8px;color:var(--muted);">Visage</div>
+    </div>
+
+    <!-- INSERT -->
+    <div onclick="showShot(5,this)" style="flex-shrink:0;cursor:pointer;text-align:center;border-radius:8px;border:2px solid var(--border);padding:6px;transition:all .2s;background:var(--card);" class="shot-card">
+      <svg viewBox="0 0 75 90" width="75" height="90" style="display:block;border-radius:3px;">
+        <rect width="75" height="90" fill="#07070F"/>
+        <!-- Hand holding phone - stylized BD -->
+        <!-- Palm -->
+        <path d="M22,58 Q20,38 26,30 L32,30 L32,50" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="2"/>
+        <!-- Fingers -->
+        <path d="M32,30 L32,18 L37,18 L37,30" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="2"/>
+        <path d="M37,28 L37,16 L42,16 L42,28" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="2"/>
+        <path d="M42,28 L42,17 L47,17 L47,28" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="2"/>
+        <path d="M47,30 L47,20 L52,20 L52,30" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="2"/>
+        <!-- Thumb -->
+        <path d="M22,50 Q16,46 16,36 Q16,28 24,28 L26,30" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="2"/>
+        <!-- Phone object -->
+        <rect x="32" y="50" width="22" height="32" rx="3" fill="#4EA8DE" stroke="#E8E4DC" stroke-width="2"/>
+        <rect x="36" y="55" width="14" height="9" rx="1" fill="#07070F"/>
+        <circle cx="43" cy="76" r="3" fill="#07070F" stroke="#E8E4DC" stroke-width="1"/>
+        <rect x="1" y="1" width="73" height="88" fill="none" stroke="#F2A900" stroke-width="2.5" rx="2"/>
+      </svg>
+      <div style="font-size:10px;font-weight:700;color:var(--text);margin-top:5px;">Insert</div>
+      <div style="font-size:8px;color:var(--muted);">Détail</div>
+    </div>
+
+  </div>
+  <div id="shot-d" style="padding:10px 14px;background:var(--hi);border-radius:7px;border-left:3px solid var(--gold);font-size:12px;margin-bottom:14px;min-height:40px;color:var(--muted);">👆 Cliquez sur une valeur de plan.</div>
+
+  <!-- STORYBOARD → PLAN AU SOL DIAGRAM -->
+  <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Du découpage technique au plan au sol — le lien direct</div>
+  <div style="background:var(--hi);border-radius:10px;padding:14px;border:1px solid var(--border);">
+    <svg viewBox="0 0 680 200" style="width:100%;height:auto;display:block;" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrDT" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L7,3 L0,6 Z" fill="#6B6B90"/>
+        </marker>
+        <marker id="arrGold" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L7,3 L0,6 Z" fill="#F2A900"/>
+        </marker>
+      </defs>
+
+      <!-- === 3 STORYBOARD FRAMES === -->
+      <!-- Frame 1: Plan Large -->
+      <rect x="8" y="10" width="110" height="76" rx="4" fill="#07070F" stroke="#F2A900" stroke-width="2"/>
+      <rect x="8" y="10" width="110" height="40" fill="#0A1520"/>
+      <rect x="8" y="50" width="110" height="36" fill="#060A04"/>
+      <rect x="18" y="28" width="4" height="22" fill="#1A4D2E"/><polygon points="20,10 14,28 26,28" fill="#2D6A4F"/>
+      <rect x="106" y="28" width="4" height="22" fill="#1A4D2E"/><polygon points="108,10 102,28 114,28" fill="#2D6A4F"/>
+      <ellipse cx="63" cy="44" rx="3" ry="3.5" fill="#E8E4DC"/>
+      <rect x="60" y="47" width="5" height="6" rx="1" fill="#E8E4DC"/>
+      <text x="63" y="96" text-anchor="middle" fill="#F2A900" font-size="9" font-weight="bold" font-family="sans-serif">① PLAN LARGE</text>
+
+      <!-- Frame 2: Plan Américain -->
+      <rect x="128" y="10" width="110" height="76" rx="4" fill="#07070F" stroke="#4EA8DE" stroke-width="2"/>
+      <ellipse cx="183" cy="25" rx="10" ry="12" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="1.5"/>
+      <path d="M173,37 Q183,34 193,37 L191,68 Q183,70 175,68 Z" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="1.5"/>
+      <path d="M173,42 Q168,52 166,62" fill="none" stroke="#E8E4DC" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M193,42 Q198,52 200,62" fill="none" stroke="#E8E4DC" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M178,68 Q177,75 176,80" fill="none" stroke="#E8E4DC" stroke-width="1.5"/>
+      <path d="M188,68 Q189,75 190,80" fill="none" stroke="#E8E4DC" stroke-width="1.5"/>
+      <!-- Cut line at mid-thigh -->
+      <line x1="128" y1="78" x2="238" y2="78" stroke="#E63946" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <rect x="128" y="10" width="110" height="68" fill="none" stroke="#4EA8DE" stroke-width="2" rx="4"/>
+      <text x="183" y="96" text-anchor="middle" fill="#4EA8DE" font-size="9" font-weight="bold" font-family="sans-serif">② PLAN AMÉRICAIN</text>
+
+      <!-- Frame 3: Gros Plan -->
+      <rect x="248" y="10" width="110" height="76" rx="4" fill="#07070F" stroke="#52B788" stroke-width="2"/>
+      <ellipse cx="303" cy="50" rx="36" ry="32" fill="#1A1A2E" stroke="#E8E4DC" stroke-width="1.5"/>
+      <ellipse cx="291" cy="45" rx="5" ry="6" fill="#07070F" stroke="#E8E4DC" stroke-width="1.5"/>
+      <ellipse cx="315" cy="45" rx="5" ry="6" fill="#07070F" stroke="#E8E4DC" stroke-width="1.5"/>
+      <circle cx="292" cy="45" r="2" fill="#E8E4DC"/><circle cx="316" cy="45" r="2" fill="#E8E4DC"/>
+      <path d="M291,38 Q303,34 315,38" fill="none" stroke="#E8E4DC" stroke-width="1.5"/>
+      <path d="M293,63 Q303,68 313,63" fill="none" stroke="#E8E4DC" stroke-width="2"/>
+      <text x="303" y="96" text-anchor="middle" fill="#52B788" font-size="9" font-weight="bold" font-family="sans-serif">③ GROS PLAN</text>
+
+      <!-- === ARROW → BECOMES === -->
+      <text x="388" y="52" text-anchor="middle" fill="#F2A900" font-size="22" font-weight="bold">→</text>
+      <text x="388" y="67" text-anchor="middle" fill="#6B6B90" font-size="8" font-family="sans-serif">DEVIENT</text>
+
+      <!-- === FLOOR PLAN (top-down) — corrigé === -->
+      <rect x="420" y="6" width="252" height="182" rx="5" fill="#07070F" stroke="#E8E4DC" stroke-width="1.5"/>
+      <text x="546" y="196" text-anchor="middle" fill="#6B6B90" font-size="8" font-family="sans-serif" letter-spacing="1">PLAN AU SOL — VUE DU DESSUS</text>
+
+      <!-- 180° axis -->
+      <line x1="420" y1="95" x2="672" y2="95" stroke="#F2A900" stroke-width="1" stroke-dasharray="6,4" opacity=".5"/>
+      <text x="654" y="91" fill="#F2A900" font-size="7" font-family="sans-serif">AXE</text>
+
+      <!-- Actor A — blue -->
+      <circle cx="490" cy="95" r="13" fill="#0C1B2E" stroke="#4EA8DE" stroke-width="2.5"/>
+      <text x="490" y="100" text-anchor="middle" fill="#4EA8DE" font-size="11" font-weight="bold" font-family="sans-serif">A</text>
+      <polygon points="503,92 512,95 503,98" fill="#4EA8DE" opacity=".6"/>
+
+      <!-- Actor B — green -->
+      <circle cx="600" cy="95" r="13" fill="#0C1E16" stroke="#52B788" stroke-width="2.5"/>
+      <text x="600" y="100" text-anchor="middle" fill="#52B788" font-size="11" font-weight="bold" font-family="sans-serif">B</text>
+      <polygon points="587,92 578,95 587,98" fill="#52B788" opacity=".6"/>
+
+      <!-- CAMERA 1: PL — gold — far south center — points NORTH ▲ -->
+      <polygon points="546,152 532,172 560,172" fill="#F2A900"/>
+      <rect x="530" y="172" width="32" height="14" rx="3" fill="#F2A900"/>
+      <!-- Wide FOV cone -->
+      <path d="M546,152 L450,97 M546,152 L648,97" stroke="#F2A900" stroke-width="1" stroke-dasharray="3,4" opacity=".3"/>
+      <circle cx="546" cy="183" r="9" fill="#F2A900"/>
+      <text x="546" y="187" text-anchor="middle" fill="#07070F" font-size="9" font-weight="bold" font-family="sans-serif">1</text>
+
+      <!-- CAMERA 2: PA — blue — far EAST, points WEST ◀ toward A -->
+      <rect x="630" y="128" width="30" height="14" rx="3" fill="#4EA8DE"/>
+      <polygon points="630,135 612,124 612,146 Z" fill="#4EA8DE"/>
+      <!-- FOV toward A -->
+      <path d="M612,124 L498,90 M612,146 L498,100" stroke="#4EA8DE" stroke-width="1.5" stroke-dasharray="3,3" opacity=".5"/>
+      <circle cx="654" cy="135" r="9" fill="#4EA8DE"/>
+      <text x="654" y="139" text-anchor="middle" fill="#07070F" font-size="9" font-weight="bold" font-family="sans-serif">2</text>
+
+      <!-- CAMERA 3: GP — green — far WEST, points EAST ▶ toward B -->
+      <rect x="428" y="119" width="30" height="14" rx="3" fill="#52B788"/>
+      <polygon points="458,126 476,115 476,137 Z" fill="#52B788"/>
+      <!-- Narrow FOV toward B -->
+      <path d="M476,115 L602,90 M476,137 L602,100" stroke="#52B788" stroke-width="1.5" stroke-dasharray="3,3" opacity=".5"/>
+      <circle cx="430" cy="126" r="9" fill="#52B788"/>
+      <text x="430" y="130" text-anchor="middle" fill="#07070F" font-size="9" font-weight="bold" font-family="sans-serif">3</text>
+
+      <!-- Movement arrows -->
+      <path d="M540,168 Q575,158 620,142" fill="none" stroke="#6B6B90" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrDT)"/>
+      <path d="M534,168 Q497,157 466,133" fill="none" stroke="#6B6B90" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrDT)"/>
+      <text x="580" y="162" fill="#6B6B90" font-size="7" font-family="sans-serif">1→2</text>
+      <text x="485" y="160" fill="#6B6B90" font-size="7" font-family="sans-serif">1→3</text>
+    </svg>
+    <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.6;">
+      Le découpage technique (les 3 plans numérotés) <strong style="color:var(--text);">génère directement le plan au sol</strong>. <span style="color:var(--gold);">Le plan au sol se construit toujours après repérage du lieu.</span>
+    </div>
+    <div style="margin-top:8px;padding:10px 14px;background:rgba(242,169,0,.08);border-radius:8px;border-left:3px solid var(--gold);font-size:12px;color:var(--muted);">
+      💡 <strong style="color:var(--text);">Je sais donc que le jour du tournage, je vais déplacer ma caméra sur 3 positions différentes</strong> : position ① pour le plan large, position <span style="color:#4EA8DE;">②</span> face à <span style="color:#4EA8DE;">A</span> pour le plan américain, position <span style="color:#52B788;">③</span> face à <span style="color:#52B788;">B</span> pour le gros plan — et tout ça avec une seule caméra.
+    </div>
+  </div>
+
+  <!-- EXEMPLE CONCRET : STORYBOARD AIGUEBELLE -->
+  <div style="margin-top:14px;">
+    <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Exemple concret — Storyboard "Les Cartes Magiques" (Aiguebelle)</div>
+    <div style="background:var(--hi);border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+      <div style="display:flex;gap:0;border-bottom:1px solid var(--border);">
+        <div onclick="showSbTab(0,this)" id="sbt0" style="padding:8px 18px;font-size:11px;font-weight:700;cursor:pointer;border-bottom:2px solid var(--gold);color:var(--gold);letter-spacing:.5px;text-transform:uppercase;">Voir le storyboard</div>
+        <div onclick="showSbTab(1,this)" id="sbt1" style="padding:8px 18px;font-size:11px;font-weight:700;cursor:pointer;border-bottom:2px solid transparent;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;">Ce qu'on y lit</div>
+      </div>
+      <div id="sb-tab0" style="padding:0;">
+        <iframe src="storyboard_-_AIGUEBELLE-_2026.pdf" style="width:100%;height:420px;border:none;display:block;" title="Storyboard Aiguebelle"></iframe>
+        <div style="padding:8px 14px;font-size:10px;color:var(--muted);border-top:1px solid var(--border);">⚠️ Si le PDF ne s'affiche pas, mettez le fichier <code>storyboard_-_AIGUEBELLE-_2026.pdf</code> dans le même dossier que ce HTML.</div>
+      </div>
+      <div id="sb-tab1" style="display:none;padding:16px 18px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--gold);margin-bottom:7px;">Sur chaque vignette</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.8;">
+              🔢 <strong style="color:var(--text);">N° de séquence</strong> + titre<br>
+              🎬 <strong style="color:var(--text);">Valeur de plan</strong> (Plan Large, Gros Plan…)<br>
+              🖼️ <strong style="color:var(--text);">Dessin de la scène</strong> (ce que verra la caméra)<br>
+              🎭 <strong style="color:var(--text);">Action</strong> — ce qui se passe<br>
+              💬 <strong style="color:var(--text);">Dialogue</strong> clé de la séquence
+            </div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--gold);margin-bottom:7px;">Pourquoi c'est utile</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.8;">
+              Le storyboard = <strong style="color:var(--text);">version dessinée du découpage technique</strong>.<br><br>
+              Avant de tourner, toute l'équipe voit exactement quoi filmer. Le cadreur sait où placer sa caméra. Le réalisateur valide le découpage. On évite les surprises le jour J.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:12px;">
+  </div>
+</div>
+
+<!-- ══ SLIDE 6 : PLAN DE TOURNAGE ══ -->
+<div class="slide" id="s5">
+  
+  <h2 class="ttl">LE PLAN DE<br>TOURNAGE</h2>
+  <p class="sub" style="margin-bottom:14px;">Une journée = <span style="color:var(--gold);">un temps · un décor · des comédiens · du matériel</span>.<br>On tourne toutes les scènes d'un même lieu le même jour — pas dans l'ordre du film.</p>
+
+  <!-- CONCRETE INVENTED EXAMPLE -->
+  <div style="background:var(--hi);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px;">
+    <!-- Header day -->
+    <div style="background:rgba(242,169,0,.12);border-bottom:1px solid rgba(242,169,0,.3);padding:12px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold);letter-spacing:2px;">📅 LUNDI · 14H – 18H</div>
+      <div style="font-size:12px;color:var(--muted);">Journée de tournage n°2</div>
+      <div style="margin-left:auto;font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--muted);letter-spacing:1px;">SÉQ. 3 — DIALOGUE PAUL &amp; MARIE</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+
+      <!-- LEFT COLUMN -->
+      <div style="border-right:1px solid var(--border);">
+        <!-- DÉCOR -->
+        <div style="padding:12px 16px;border-bottom:1px solid var(--border);">
+          <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;">📍 DÉCOR</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);">Salon — appartement de Paul</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px;">Intérieur · Lumière artificielle · Autorisations ✓</div>
+        </div>
+
+        <!-- PLANS À TOURNER -->
+        <div style="padding:12px 16px;border-bottom:1px solid var(--border);">
+          <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;">🎬 PLANS À TOURNER</div>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;padding:5px 8px;background:rgba(242,169,0,.07);border-radius:5px;">
+              <span style="font-family:'Bebas Neue';font-size:16px;color:var(--gold);">①</span>
+              <span style="color:var(--muted);"><strong style="color:var(--text);">Plan Large</strong> — Salon entier, les 2 persos</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;padding:5px 8px;background:rgba(78,168,222,.07);border-radius:5px;">
+              <span style="font-family:'Bebas Neue';font-size:16px;color:#4EA8DE;">②</span>
+              <span style="color:var(--muted);"><strong style="color:#4EA8DE;">Plan Américain</strong> — <span style="color:#4EA8DE;">Paul (A)</span></span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;padding:5px 8px;background:rgba(82,183,136,.07);border-radius:5px;">
+              <span style="font-family:'Bebas Neue';font-size:16px;color:#52B788;">③</span>
+              <span style="color:var(--muted);"><strong style="color:#52B788;">Gros Plan</strong> — <span style="color:#52B788;">Marie (B)</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACCESSOIRES -->
+        <div style="padding:12px 16px;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;">🎒 ACCESSOIRES</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.8;">
+            Table basse · 2 tasses de café<br>Livre ouvert · Lampe de salon
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <!-- COMÉDIENS -->
+        <div style="padding:12px 16px;border-bottom:1px solid var(--border);">
+          <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;">🎭 COMÉDIENS</div>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
+              <div style="width:26px;height:26px;border-radius:50%;background:#0C1B2E;border:2px solid #4EA8DE;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#4EA8DE;flex-shrink:0;">A</div>
+              <span style="color:var(--text);">Paul</span><span style="color:var(--muted);font-size:10px;">— rôle principal</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
+              <div style="width:26px;height:26px;border-radius:50%;background:#0C1E16;border:2px solid #52B788;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#52B788;flex-shrink:0;">B</div>
+              <span style="color:var(--text);">Marie</span><span style="color:var(--muted);font-size:10px;">— rôle secondaire</span>
+            </div>
+          </div>
+          <div style="font-size:10px;color:var(--red);margin-top:6px;">⚠️ Scénario appris en avance — répétitions faites</div>
+        </div>
+
+        <!-- ÉQUIPE TECHNIQUE -->
+        <div style="padding:12px 16px;border-bottom:1px solid var(--border);">
+          <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;">👥 ÉQUIPE TECHNIQUE</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.8;">
+            🎥 Cadreur : Tom<br>
+            🎙️ Preneur de son : Lisa<br>
+            💡 Lumière : Tom (cumul)
+          </div>
+        </div>
+
+        <!-- MATÉRIEL -->
+        <div style="padding:12px 16px;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;">🔧 MATÉRIEL DU JOUR</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.8;">
+            Caméra + trépied<br>
+            Micro canon sur perche<br>
+            Enregistreur + casque<br>
+            2 LED sur trépied + boules chinoises
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Footer note -->
+    <div style="padding:10px 18px;border-top:1px solid var(--border);background:rgba(242,169,0,.04);font-size:11px;color:var(--muted);">
+      💡 <strong style="color:var(--text);">Le jour du tournage :</strong> on arrive, on installe le décor, on répète, on tourne les 3 positions caméra, on range. La séquence 3 est faite. Demain : un autre décor, d'autres comédiens.
+    </div>
+  </div>
+
+  <!-- EXEMPLE CONCRET : PLAN DE TOURNAGE PARABOOT -->
+  <div style="margin-top:14px;">
+    <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Exemple concret — Plan de tournage "Paraboot"</div>
+    <div style="background:var(--hi);border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+      <div style="display:flex;gap:0;border-bottom:1px solid var(--border);">
+        <div onclick="showPtTab(0,this)" id="ptt0" style="padding:8px 18px;font-size:11px;font-weight:700;cursor:pointer;border-bottom:2px solid var(--gold);color:var(--gold);letter-spacing:.5px;text-transform:uppercase;">Voir le plan</div>
+        <div onclick="showPtTab(1,this)" id="ptt1" style="padding:8px 18px;font-size:11px;font-weight:700;cursor:pointer;border-bottom:2px solid transparent;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;">Ce qu'on y lit</div>
+      </div>
+      <div id="pt-tab0" style="padding:0;">
+        <iframe src="PLA_NDE_TOURNAGE_FILM_PARABOOT.pdf" style="width:100%;height:400px;border:none;display:block;" title="Plan de tournage Paraboot"></iframe>
+        <div style="padding:8px 14px;font-size:10px;color:var(--muted);border-top:1px solid var(--border);">⚠️ Si le PDF ne s'affiche pas, placez le fichier dans le même dossier que ce HTML.</div>
+      </div>
+      <div id="pt-tab1" style="display:none;padding:16px 18px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--gold);margin-bottom:7px;">Sur chaque ligne</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.8;">
+              📅 <strong style="color:var(--text);">Date et horaire</strong> de la journée<br>
+              🎬 <strong style="color:var(--text);">N° de scène</strong> à tourner<br>
+              📍 <strong style="color:var(--text);">Lieu précis</strong> dans le décor<br>
+              🎭 <strong style="color:var(--text);">Personnages</strong> présents<br>
+              🎒 <strong style="color:var(--text);">Accessoires</strong> nécessaires
+            </div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--gold);margin-bottom:7px;">Ce plan en chiffres</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.8;">
+              3 journées de tournage<br>
+              16 scènes au total<br>
+              2 lieux différents<br>
+              <br>
+              Scènes 1 et 2 du film <strong style="color:var(--text);">tournées lors de la 3ème journée</strong> — ordre logistique, pas narratif.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 7 : PLAN AU SOL ══ -->
+<div class="slide" id="s6">
+  
+  <h2 class="ttl">LE PLAN AU SOL</h2>
+  <p class="sub" style="margin-bottom:10px;">Le découpage technique donne les plans. Le plan au sol dit <span style="color:var(--gold);">où placer la caméra</span> pour les réaliser — dans un lieu réel repéré à l'avance.</p>
+
+  <!-- Chain reminder -->
+  <div style="display:flex;align-items:center;gap:8px;background:var(--hi);border-radius:8px;padding:12px 16px;border:1px solid var(--border);margin-bottom:12px;font-size:12px;">
+    <span style="color:var(--green);font-weight:700;">📐 Découpage Tech.</span>
+    <span style="color:var(--muted);">→</span>
+    <span style="color:var(--gold);font-weight:700;">🗺️ Plan au Sol</span>
+    <span style="color:var(--muted);">→</span>
+    <span style="color:var(--text);">🎥 Position Caméra</span>
+    <span style="color:var(--muted);">→</span>
+    <span style="color:var(--text);">💡 Lumières</span>
+    <span style="color:var(--muted);">→</span>
+    <span style="color:var(--text);">🎙️ Son</span>
+  </div>
+
+  <div class="g2">
+    <div>
+      <!-- PROPER FLOOR PLAN SVG -->
+      <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">Plan au sol — vue du dessus (normes)</div>
+      <div style="background:var(--hi);border-radius:10px;padding:10px;border:1px solid var(--border);">
+        <svg viewBox="0 0 340 240" style="width:100%;height:auto;display:block;" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrFloor" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#6B6B90"/>
+            </marker>
+          </defs>
+
+          <!-- Room boundary (walls) -->
+          <rect x="10" y="10" width="320" height="200" rx="4" fill="#07070F" stroke="#E8E4DC" stroke-width="2"/>
+          <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="6" stroke="#1C1C32" stroke-width="2"/>
+          </pattern>
+          <rect x="10" y="10" width="320" height="6" fill="url(#hatch)"/>
+          <rect x="10" y="204" width="320" height="6" fill="url(#hatch)"/>
+          <rect x="10" y="10" width="6" height="200" fill="url(#hatch)"/>
+          <rect x="324" y="10" width="6" height="200" fill="url(#hatch)"/>
+
+          <!-- 180° AXIS -->
+          <line x1="10" y1="110" x2="330" y2="110" stroke="#F2A900" stroke-width="1.5" stroke-dasharray="8,5" opacity=".6"/>
+          <text x="272" y="105" fill="#F2A900" font-size="7" font-family="sans-serif" font-weight="bold">AXE 180°</text>
+
+          <!-- Actor A — blue -->
+          <circle cx="115" cy="110" r="14" fill="#0C1B2E" stroke="#4EA8DE" stroke-width="2.5"/>
+          <text x="115" y="115" text-anchor="middle" fill="#4EA8DE" font-size="12" font-weight="bold" font-family="sans-serif">A</text>
+          <polygon points="129,107 138,110 129,113" fill="#4EA8DE" opacity=".6"/>
+
+          <!-- Actor B — green -->
+          <circle cx="225" cy="110" r="14" fill="#0C1E16" stroke="#52B788" stroke-width="2.5"/>
+          <text x="225" y="115" text-anchor="middle" fill="#52B788" font-size="12" font-weight="bold" font-family="sans-serif">B</text>
+          <polygon points="211,107 202,110 211,113" fill="#52B788" opacity=".6"/>
+
+          <!-- CAMERA 1: PL — gold — far south center — ▲ points NORTH -->
+          <polygon points="167,166 150,185 184,185" fill="#F2A900"/>
+          <rect x="148" y="185" width="38" height="16" rx="3" fill="#F2A900"/>
+          <path d="M167,166 L88,113 M167,166 L252,113" stroke="#F2A900" stroke-width="1" stroke-dasharray="3,4" opacity=".3"/>
+          <circle cx="167" cy="200" r="9" fill="#F2A900"/>
+          <text x="167" y="204" text-anchor="middle" fill="#07070F" font-size="9" font-weight="bold" font-family="sans-serif">1</text>
+          <text x="167" y="215" text-anchor="middle" fill="#F2A900" font-size="7" font-family="sans-serif">PLAN LARGE</text>
+
+          <!-- CAMERA 2: PA — blue — far EAST, ◀ points WEST toward A -->
+          <rect x="278" y="140" width="34" height="14" rx="3" fill="#4EA8DE"/>
+          <polygon points="278,147 256,137 256,157 Z" fill="#4EA8DE"/>
+          <path d="M256,137 L122,107 M256,157 L122,113" stroke="#4EA8DE" stroke-width="1.5" stroke-dasharray="3,3" opacity=".5"/>
+          <circle cx="308" cy="147" r="9" fill="#4EA8DE"/>
+          <text x="308" y="151" text-anchor="middle" fill="#07070F" font-size="9" font-weight="bold" font-family="sans-serif">2</text>
+          <text x="308" y="163" text-anchor="middle" fill="#4EA8DE" font-size="7" font-family="sans-serif">PLAN AMÉR.</text>
+
+          <!-- CAMERA 3: GP — green — far WEST, ▶ points EAST toward B -->
+          <rect x="28" y="134" width="34" height="14" rx="3" fill="#52B788"/>
+          <polygon points="62,141 84,131 84,151 Z" fill="#52B788"/>
+          <path d="M84,131 L224,107 M84,151 L224,113" stroke="#52B788" stroke-width="1.5" stroke-dasharray="3,3" opacity=".5"/>
+          <circle cx="20" cy="141" r="9" fill="#52B788"/>
+          <text x="20" y="145" text-anchor="middle" fill="#07070F" font-size="9" font-weight="bold" font-family="sans-serif">3</text>
+          <text x="22" y="157" text-anchor="middle" fill="#52B788" font-size="7" font-family="sans-serif">GROS PLAN</text>
+
+          <!-- Movement arrows -->
+          <path d="M175,182 Q230,170 272,154" fill="none" stroke="#6B6B90" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrFloor)"/>
+          <path d="M160,182 Q110,170 68,152" fill="none" stroke="#6B6B90" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrFloor)"/>
+          <text x="228" y="173" fill="#6B6B90" font-size="7" font-family="sans-serif">1→2</text>
+          <text x="95" y="173" fill="#6B6B90" font-size="7" font-family="sans-serif">1→3</text>
+        </svg>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">UNE SEULE CAMÉRA — comment ça marche</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+
+        <div style="padding:11px 14px;background:var(--hi);border-radius:8px;border:1px solid rgba(242,169,0,.3);">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--gold);margin-bottom:5px;">📐 Du storyboard au plan au sol</div>
+          <div style="font-size:11px;color:var(--muted);">Le découpage dit <strong style="color:var(--text);">quels plans tourner</strong>. Le plan au sol dit <strong style="color:var(--text);">où se mettre pour les faire</strong>. On reporte chaque plan numéroté en position caméra sur la vue du dessus.</div>
+        </div>
+
+        <div style="padding:11px 14px;background:var(--hi);border-radius:8px;border:1px solid rgba(78,168,222,.3);">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--blue);margin-bottom:5px;">🎥 Déplacer une seule caméra</div>
+          <div style="font-size:11px;color:var(--muted);">Position ① → tourner le Plan Large. On déplace vers ② → Plan Américain. On déplace vers ③ → Gros Plan. <strong style="color:var(--text);">La caméra se déplace entre les prises, pas simultanément.</strong></div>
+        </div>
+
+        <div style="padding:11px 14px;background:rgba(230,57,70,.08);border-radius:8px;border:1px solid rgba(230,57,70,.3);">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--red);margin-bottom:5px;">⚠️ Pourquoi PAS de multi-caméra en amateur</div>
+          <div style="font-size:11px;color:var(--muted);">Plusieurs caméras = <strong style="color:var(--text);">étalonnage (colorimétrie) différent par appareil</strong>. En post-production, aligner les couleurs de 2 smartphones = quasi impossible sans matériel pro. On déplace → on garde la cohérence visuelle.</div>
+        </div>
+
+        <div style="padding:11px 14px;background:rgba(82,183,136,.08);border-radius:8px;border:1px solid rgba(82,183,136,.3);">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:5px;">🔍 Repérage préalable — indispensable</div>
+          <div style="font-size:11px;color:var(--muted);">Le plan au sol ne se dessine <strong style="color:var(--text);">qu'après être allé sur place</strong>. On prend des photos, on mesure les espaces, on identifie les contraintes lumière. Sans repérage : le plan au sol est faux → le tournage s'improvise → pièges.</div>
+        </div>
+
+      </div>
+
+      <!-- Installation order -->
+      <div style="margin-top:10px;padding:10px 12px;background:rgba(242,169,0,.1);border-radius:7px;border:1px solid rgba(242,169,0,.4);font-size:12px;">
+        🎬 <strong style="color:var(--gold);">Répéter → Caméra → Lumières ON → Réglages → Son → Action</strong>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:12px;">
+  
+  </div>
+</div>
+
+<!-- ══ SLIDE 8 : PRÉPARER SON MATÉRIEL ══ -->
+<div class="slide" id="s7">
+  
+  <h2 class="ttl">LA VEILLE<br>DU TOURNAGE</h2>
+
+  <div class="g2" style="margin-bottom:14px;">
+    <div>
+      <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:8px;">⚠️ Checklist obligatoire — veille J-1</div>
+      <div id="mat-chk">
+        <div class="chk" onclick="toggleChk(this)"><div class="chkb"></div><div class="chk-l"><strong>Batteries chargées</strong><span>Minimum 2 batteries par appareil</span></div></div>
+        <div class="chk" onclick="toggleChk(this)"><div class="chkb"></div><div class="chk-l"><strong>Cartes SD vidées et vérifiées</strong><span>Classe 10 minimum · 64 Go minimum</span></div></div>
+        <div class="chk" onclick="toggleChk(this)"><div class="chkb"></div><div class="chk-l"><strong>Objectifs nettoyés</strong><span>Kit de nettoyage optique</span></div></div>
+        <div class="chk" onclick="toggleChk(this)"><div class="chkb"></div><div class="chk-l"><strong>Son testé — niveaux réglés</strong><span>Câbles micro 3.5mm · Piles pour micros</span></div></div>
+        <div class="chk" onclick="toggleChk(this)"><div class="chkb"></div><div class="chk-l"><strong>Réglages caméra préparés</strong><span>1080p · 25 i/s · 48 000 Hz audio</span></div></div>
+        <div class="chk" onclick="toggleChk(this)"><div class="chkb"></div><div class="chk-l"><strong>Décors, costumes, accessoires prêts</strong><span>Selon le dépouillement du jour</span></div></div>
+        <div class="chk" onclick="toggleChk(this)"><div class="chkb"></div><div class="chk-l"><strong>Exemplaires scénario imprimés</strong><span>Un exemplaire pour chaque membre de l'équipe sur le plateau</span></div></div>
+        <div class="chk" onclick="toggleChk(this)"><div class="chkb"></div><div class="chk-l"><strong>Multi-prises / rallonges / gaffer</strong><span>+ tournevis, pinces multi-usages</span></div></div>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:rgba(230,57,70,.08);border:1px solid rgba(230,57,70,.3);border-radius:7px;font-size:11px;color:var(--muted);">
+        ⚠️ <strong style="color:var(--red);">Le scénario aux comédiens</strong> : distribué <strong style="color:var(--text);">bien en avance</strong> (plusieurs jours avant), pas à J-1 ! À J-1 ils doivent <em>déjà savoir leur texte</em>. Sur le plateau : exemplaires imprimés pour toute l'équipe technique comme référence.
+      </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Kit minimal opérationnel</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="card card-b" style="padding:12px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:5px;">📷 Prise de vue</div>
+          <div style="font-size:11px;color:var(--muted);">Smartphone + <strong style="color:var(--text);">trépied</strong> ou stabilisateur. Format 1080p 25i/s.</div>
+        </div>
+        <div class="card card-g" style="padding:12px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;">🎙️ Son — solution minimale</div>
+          <div style="font-size:11px;color:var(--muted);">2ème smartphone + micro cravate 3.5mm ou micro HF. <strong style="color:var(--text);">Casque pour contrôle.</strong></div>
+        </div>
+        <div class="card card-gr" style="padding:12px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green);margin-bottom:5px;">💡 Lumière minimale</div>
+          <div style="font-size:11px;color:var(--muted);">Halogènes existants tournés vers plafond blanc = lumière diffuse. <strong style="color:var(--text);">Boule chinoise sur lampe de bureau</strong>.</div>
+        </div>
+        <div class="card" style="padding:12px;border-color:rgba(230,57,70,.3);background:rgba(230,57,70,.04);">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--red);margin-bottom:5px;">🚶 Travelling DIY</div>
+          <div style="font-size:11px;color:var(--muted);"><strong style="color:var(--text);">Fauteuil roulant</strong> = très bonne dolly. Son à enregistrer en post (bruits de roulements).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 9 : LES PIÈGES ══ -->
+<div class="slide" id="s8">
+  
+  <h2 class="ttl" style="font-size:38px;">PIÈGES &amp;<br>BONNES PRATIQUES</h2>
+
+  <div class="ptabs">
+    <div class="ptab on" onclick="pTab(this,'pt-son')">🔇 LE SON</div>
+    <div class="ptab" onclick="pTab(this,'pt-180')">🎬 RÈGLE DES 180°</div>
+    <div class="ptab" onclick="pTab(this,'pt-raccords')">🔗 RACCORDS</div>
+    <div class="ptab" onclick="pTab(this,'pt-voix')">📞 VOIX HORS CHAMP</div>
+    <div class="ptab" onclick="pTab(this,'pt-pieges')">⚡ AUTRES PIÈGES</div>
+  </div>
+
+  <!-- SON -->
+  <div class="ptabcnt on" id="pt-son">
+    <div class="g2">
+      <div>
+        <div class="ibox r" style="margin-bottom:12px;"><strong>LE SON est le piège n°1.</strong> Une image tremblante passe — un son mauvais = film inutilisable. Hiérarchie des solutions :</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+
+          <div class="card" style="padding:12px;border-color:rgba(242,169,0,.5);background:rgba(242,169,0,.08);">
+            <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">🏆 IDÉAL — Micro canon sur perche</div>
+            <div style="display:flex;align-items:flex-start;gap:10px;">
+              <div style="text-align:center;flex-shrink:0;line-height:1.6;font-size:14px;">🎤<br><span style="font-size:8px;color:var(--muted);">canon</span><br>|<br><span style="font-size:14px;">🎙️</span><br><span style="font-size:8px;color:var(--muted);">perche</span><br>|<br>🧑</div>
+              <div style="font-size:11px;color:var(--muted);">Micro canon (cardioïde directif) fixé sur une perche. Capte la voix de façon précise et directionnelle. Branché sur la caméra ou sur un enregistreur externe. <strong style="color:var(--text);">Hors champ, au-dessus — jamais dans le champ !</strong></div>
+            </div>
+          </div>
+
+          <div class="card card-b" style="padding:12px;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">⭐ TRÈS BON — Micro HF sur perche ou cravate</div>
+            <div style="display:flex;align-items:flex-start;gap:10px;">
+              <div style="text-align:center;flex-shrink:0;line-height:1.6;font-size:14px;">📡<br><span style="font-size:8px;color:var(--muted);">émetteur</span><br>↕<br><span style="font-size:14px;">📻</span><br><span style="font-size:8px;color:var(--muted);">récepteur</span></div>
+              <div style="font-size:11px;color:var(--muted);">Micro HF (sans fil) — émetteur sur le comédien (cravate ou perche HF), récepteur branché sur la caméra ou l'enregistreur. Liberté de mouvement totale. Si HF pas dispo : <strong style="color:var(--text);">perche DIY = pince + micro cravate + manche à balai ou canne à pêche, tenu par un pote !</strong></div>
+            </div>
+          </div>
+
+          <div class="card card-gr" style="padding:12px;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green);margin-bottom:6px;">✅ SOLUTION FILAIRE — Cravate cachée sur le comédien</div>
+            <div style="font-size:11px;color:var(--muted);">Micro cravate filaire branché en 3.5mm sur un 2ème smartphone (enregistreur). Câble <strong style="color:var(--text);">caché sous les vêtements</strong> du comédien. Synchronisation : <strong style="color:var(--gold);">CLAP</strong> visible face caméra au début de chaque prise.</div>
+          </div>
+
+        </div>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Sans vumètre — règles de base</div>
+        <div style="display:flex;flex-direction:column;gap:7px;">
+          <div class="ibox gr"><strong>Niveau :</strong> enregistrer à 70-80% du max. Jamais au maximum → saturation = inutilisable.</div>
+          <div class="ibox b"><strong>Toujours</strong> un casque pendant la prise pour contrôler en temps réel.</div>
+          <div class="ibox"><strong>CLAP</strong> = frapper les mains bien fort devant la caméra → synchronisation en post facile.</div>
+        </div>
+
+        <div style="margin-top:10px;padding:12px;background:var(--hi);border-radius:8px;border:1px solid var(--border);">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--red);margin-bottom:6px;">❌ Erreurs à éviter</div>
+          <div style="font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:4px;">
+            <div>❌ Micro intégré à la caméra seul (trop loin, bruit de fond)</div>
+            <div></div>
+            <div>❌ Oublier de tester les niveaux avant de tourner</div>
+          </div>
+        </div>
+
+        <div style="margin-top:10px;padding:12px;background:var(--hi);border-radius:8px;border:1px solid rgba(78,168,222,.3);">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">🎧 Filtre téléphone — EQ en post-production</div>
+          <div style="font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:4px;">
+            <div>① <strong style="color:var(--text);">Passe-haut (HPF) à 300-400 Hz</strong> — coupe tout le grave/basse</div>
+            <div>② <strong style="color:var(--text);">Passe-bas (LPF) à 3 400 Hz</strong> — coupe les aigus (bande passante téléphonique standard)</div>
+            <div>③ <strong style="color:var(--text);">Couper les médiums-bas : -4 à -6 dB autour de 250-400 Hz</strong> (élimine la chaleur)</div>
+            <div>④ <strong style="color:var(--text);">Boost à 1 500 Hz : +3 à +5 dB</strong> — timbre nasal caractéristique du téléphone</div>
+            <div>⑤ <strong style="color:var(--text);">Baisser le niveau global : -4 à -6 dB</strong> — la voix téléphone est plus faible</div>
+            <div>⑥ Optionnel : légère saturation/distorsion pour le côté analogique</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 180° -->
+  <div class="ptabcnt" id="pt-180">
+    <div class="g2">
+      <div>
+        <div class="ibox r" style="margin-bottom:12px;"><strong>La règle des 180°</strong> : toutes vos caméras doivent rester du même côté de la ligne d'action. Si vous la franchissez, vos personnages semblent "changer de côté" au montage.</div>
+        <div class="diag-180">
+          <svg viewBox="0 0 400 240" style="width:100%;height:auto;display:block;">
+            <!-- Background zones -->
+            <rect x="0" y="0" width="400" height="120" fill="rgba(82,183,136,0.07)"/>
+            <rect x="0" y="120" width="400" height="120" fill="rgba(230,57,70,0.07)"/>
+
+            <!-- Axis line -->
+            <line x1="0" y1="120" x2="400" y2="120" stroke="#F2A900" stroke-width="2" stroke-dasharray="8,5"/>
+            <text x="10" y="116" fill="#F2A900" font-size="9" font-weight="bold" letter-spacing="2">LIGNE D'ACTION (AXE)</text>
+
+            <!-- Actor A -->
+            <text x="70" y="130" font-size="28" text-anchor="middle">🧑</text>
+            <text x="70" y="148" fill="#6B6B90" font-size="9" text-anchor="middle">ACTEUR A</text>
+
+            <!-- Actor B -->
+            <text x="330" y="130" font-size="28" text-anchor="middle">🧑</text>
+            <text x="330" y="148" fill="#6B6B90" font-size="9" text-anchor="middle">ACTEUR B</text>
+
+            <!-- Arrow between actors -->
+            <line x1="100" y1="118" x2="300" y2="118" stroke="#6B6B90" stroke-width="1"/>
+            <polygon points="300,115 307,118 300,121" fill="#6B6B90"/>
+            <polygon points="100,115 93,118 100,121" fill="#6B6B90"/>
+
+            <!-- CORRECT cameras (top - green zone) -->
+            <text x="100" y="78" font-size="18" text-anchor="middle">📷</text>
+            <text x="200" y="55" font-size="18" text-anchor="middle">📷</text>
+            <text x="300" y="78" font-size="18" text-anchor="middle">📷</text>
+            <text x="100" y="92" fill="#52B788" font-size="9" text-anchor="middle">✓ OK</text>
+            <text x="200" y="69" fill="#52B788" font-size="9" text-anchor="middle">✓ OK</text>
+            <text x="300" y="92" fill="#52B788" font-size="9" text-anchor="middle">✓ OK</text>
+            <text x="200" y="20" fill="#52B788" font-size="11" text-anchor="middle" font-weight="bold">ZONE AUTORISÉE</text>
+
+            <!-- WRONG camera (bottom - red zone) -->
+            <text x="200" y="196" font-size="18" text-anchor="middle">📷</text>
+            <text x="200" y="210" fill="#E63946" font-size="9" text-anchor="middle">✗ INTERDIT</text>
+            <text x="200" y="230" fill="#E63946" font-size="11" text-anchor="middle" font-weight="bold">ZONE INTERDITE → RACCORD CASSÉ</text>
+
+            <!-- X mark on wrong camera -->
+            <line x1="190" y1="174" x2="210" y2="182" stroke="#E63946" stroke-width="2"/>
+            <line x1="210" y1="174" x2="190" y2="182" stroke="#E63946" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Concrètement</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="ibox gr"><strong>Imaginez</strong> une ligne qui passe entre vos deux personnages (ou entre le personnage et son sujet). Toutes vos caméras restent du même côté.</div>
+          <div class="ibox"><strong>Pour changer de côté</strong> sans casser le raccord : filmer depuis l'axe lui-même (plan neutre), puis traverser. Ou couper sur un plan large.</div>
+          <div class="ibox r"><strong>Si vous franchissez l'axe</strong> : A était à gauche → A se retrouve à droite. Le spectateur est perdu. Le raccord est impossible à sauver au montage.</div>
+        </div>
+        <div style="margin-top:10px;padding:12px;background:var(--hi);border-radius:8px;border:1px solid var(--border);">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">💡 Astuce</div>
+          <div style="font-size:11px;color:var(--muted);">Dessinez votre plan au sol <em>avant</em> de tourner. La règle des 180° devient évidente quand vous visualisez les positions des caméras sur le papier.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RACCORDS -->
+  <div class="ptabcnt" id="pt-raccords">
+    <div class="g2">
+      <div>
+        <div class="ibox r" style="margin-bottom:12px;"><strong>Le raccord</strong> : au montage, deux plans consécutifs doivent donner l'illusion d'une continuité parfaite. Si les gestes, positions ou regards changent entre les prises → raccord impossible.</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="card card-g" style="padding:12px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:5px;">✅ La clé : Simplicité + Répétition</div>
+            <div style="font-size:11px;color:var(--muted);">Chorégraphie simple pour les comédiens. <strong style="color:var(--text);">Ils reproduisent exactement les mêmes gestes</strong> à chaque prise. Le scripte note tout.</div>
+          </div>
+          <div class="card card-b" style="padding:12px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--blue);margin-bottom:5px;">📷 Tourner depuis différents endroits</div>
+            <div style="font-size:11px;color:var(--muted);">Si les gestes sont identiques d'une prise à l'autre, on peut raccorder n'importe quel plan sur n'importe quel autre. <strong style="color:var(--text);">Le raccord se fait en post-production.</strong></div>
+          </div>
+          <div class="card" style="padding:12px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text);margin-bottom:5px;">🎬 Plusieurs prises par plan</div>
+            <div style="font-size:11px;color:var(--muted);">La dernière prise = la bonne. Concertation après chaque prise : cadrage OK ? Son OK ? Jeu OK ? Sinon on reprend.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Les raccords à surveiller</div>
+        <div style="display:flex;flex-direction:column;gap:7px;">
+          <div style="padding:10px 12px;background:var(--hi);border-radius:7px;border:1px solid var(--border);">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--text);margin-bottom:3px;">👗 Raccord costumes / accessoires</div>
+            <div style="font-size:11px;color:var(--muted);">Mêmes vêtements, même position (veste ouverte/fermée, montre au bon poignet...)</div>
+          </div>
+          <div style="padding:10px 12px;background:var(--hi);border-radius:7px;border:1px solid var(--border);">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--text);margin-bottom:3px;">🤲 Raccord gestes</div>
+            <div style="font-size:11px;color:var(--muted);">Le verre est dans la main droite → toujours dans la main droite. Même niveau de remplissage.</div>
+          </div>
+          <div style="padding:10px 12px;background:var(--hi);border-radius:7px;border:1px solid var(--border);">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--text);margin-bottom:3px;">👁️ Raccord regard</div>
+            <div style="font-size:11px;color:var(--muted);">Si A regarde à droite → B doit regarder à gauche (regard dans l'axe).</div>
+          </div>
+          <div class="ibox gr" style="margin-top:4px;"><strong>⚡ Astuce anti-FAUX-raccord mouvements :</strong> couper sur une action (le personnage se lève, on coupe quand il est à mi-chemin → personne ne voit les petites différences de position entre les prises).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VOIX HORS CHAMP -->
+  <div class="ptabcnt" id="pt-voix">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:14px;">Question de l'étudiant : <em style="color:var(--text);">"J'ai un dialogue entre un personnage visible et un personnage pas visible (conversation téléphonique). Par quel bout commencer ?"</em></div>
+    <div class="g2">
+      <div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="card card-g" style="padding:14px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:7px;">⭐ Solution recommandée</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><div style="width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--bg);font-family:'Bebas Neue';font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div><div style="color:var(--muted);">Enregistrer d'abord la <strong style="color:var(--text);">voix du personnage absent</strong> (le correspondant téléphonique)</div></div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><div style="width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--bg);font-family:'Bebas Neue';font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div><div style="color:var(--muted);"><strong style="color:var(--text);">Diffuser cet enregistrement</strong> dans une petite oreillette filaire <strong style="color:var(--text);">discrète, cachée dans les cheveux ou côté profil</strong> — jamais visible à l'écran</div></div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><div style="width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--bg);font-family:'Bebas Neue';font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div><div style="color:var(--muted);">L'acteur joue <strong style="color:var(--text);">en réaction</strong> à ce qu'il entend → performance naturelle</div></div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><div style="width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--bg);font-family:'Bebas Neue';font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div><div style="color:var(--muted);">En montage : ajouter un <strong style="color:var(--text);">filtre téléphone</strong> sur la voix absente (passe-haut ~300Hz, léger cut des basses)</div></div>
+            </div>
+          </div>
+          <div class="card" style="padding:12px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text);margin-bottom:5px;">Alternative : les silences</div>
+            <div style="font-size:11px;color:var(--muted);">L'acteur laisse des silences calculés entre ses répliques. La voix absente est ajoutée au montage. Nécessite un minutage précis lors du tournage.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="ibox b" style="margin-bottom:10px;"><strong>Sur l'ordre de tournage :</strong> filmer les scènes du personnage absent EN PREMIER. Il/elle est disponible, la scène est fraîche. Ensuite le personnage visible joue avec la voix enregistrée.</div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Réponse sur l'ordre de tournage général</div>
+        <div class="ibox">L'ordre pertinent = l'ordre du <strong>séquencier</strong> — regrouper par décor. Filmer en premier les plans les plus complexes techniquement (lumière à installer, son difficile), quand l'équipe est fraîche.</div>
+        <div style="margin-top:10px;" class="ibox r">Pour anticiper les problèmes de montage : tout dessiner sur le plan au sol <strong>avant</strong> de tourner. Visualiser les raccords sur le découpage technique. Ce qui n'est pas anticipé à l'écrit ne peut pas être réparé en montage.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTRES PIÈGES -->
+  <div class="ptabcnt" id="pt-pieges">
+    <div class="g3">
+      <div class="card card-r" style="padding:14px;">
+        <div style="font-size:26px;margin-bottom:6px;">📋</div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--red);margin-bottom:6px;">Piège n°1 · L'impréparation</div>
+        <div style="font-size:11px;color:var(--muted);">Pas de séquencier → tournage chaotique. Pas de découpage → comédiens perdus. Pas de plan au sol → caméra mal placée.</div>
+        <div style="font-size:11px;color:var(--green);margin-top:7px;">✅ <strong style="color:var(--text);">La méthode</strong> évite tout ça.</div>
+      </div>
+      <div class="card card-r" style="padding:14px;">
+        <div style="font-size:26px;margin-bottom:6px;">📍</div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--red);margin-bottom:6px;">Piège n°2 · S'adapter au lieu</div>
+        <div style="font-size:11px;color:var(--muted);">C'est le lieu qui doit s'adapter à votre tournage — et non l'inverse. Repérage préalable obligatoire.</div>
+        <div style="font-size:11px;color:var(--green);margin-top:7px;">✅ Repérage + plan au sol <strong style="color:var(--text);">avant</strong> le jour J.</div>
+      </div>
+      <div class="card card-r" style="padding:14px;">
+        <div style="font-size:26px;margin-bottom:6px;">😶</div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--red);margin-bottom:6px;">Piège n°3 · Comédiens perdus</div>
+        <div style="font-size:11px;color:var(--muted);">Comédiens qui ne savent pas leur texte, qui ne savent pas où aller, ce qu'ils font dans la scène.</div>
+        <div style="font-size:11px;color:var(--green);margin-top:7px;">✅ Scénario distribué, répétitions <strong style="color:var(--text);">avant</strong> le tournage.</div>
+      </div>
+      <div class="card card-r" style="padding:14px;">
+        <div style="font-size:26px;margin-bottom:6px;">📷</div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--red);margin-bottom:6px;">Piège n°4 · Instabilité</div>
+        <div style="font-size:11px;color:var(--muted);">Caméra à la main sans raison = image qui donne mal au cœur. Le spectateur veut du stable ou du mouvement assumé.</div>
+        <div style="font-size:11px;color:var(--green);margin-top:7px;">✅ <strong style="color:var(--text);">Trépied toujours</strong> pour les plans fixes.</div>
+      </div>
+      <div class="card card-r" style="padding:14px;">
+        <div style="font-size:26px;margin-bottom:6px;">🎬</div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--red);margin-bottom:6px;">Piège n°5 · Mauvais axe caméra</div>
+        <div style="font-size:11px;color:var(--muted);">Franchir la ligne des 180° = raccord cassé impossible à sauver au montage. On ne peut pas le réparer en post.</div>
+        <div style="font-size:11px;color:var(--green);margin-top:7px;">✅ Plan au sol + <strong style="color:var(--text);">règle des 180°</strong> (onglet précédent).</div>
+      </div>
+      <div class="card" style="padding:14px;border-color:rgba(242,169,0,.3);background:rgba(242,169,0,.06);">
+        <div style="font-size:26px;margin-bottom:6px;">💡</div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:6px;">La règle absolue</div>
+        <div style="font-size:11px;color:var(--muted);">Ce qui n'est pas anticipé à l'<strong style="color:var(--text);">écrit</strong> (scénario, découpage) ne peut pas être <strong style="color:var(--text);">réparé au montage</strong>. Préparer = libérer la créativité sur le plateau.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /sw -->
+
+<div class="snav">
+  <button class="sbtn" onclick="nav(-1)">←</button>
+  <button class="sbtn" onclick="nav(1)">→</button>
+</div>
+
+<script>
+const SLIDES=[
+  {t:'Contexte Vidéo',i:'📱'},{t:'La Méthode',i:'🎯'},{t:'Séquencier',i:'📋'},
+  {t:'Scénario',i:'📝'},{t:'Découpage',i:'📐'},{t:'Plan de Tournage',i:'🗓️'},
+  {t:'Plan au Sol',i:'🗺️'},{t:'Matériel J-1',i:'📦'},{t:'Pièges',i:'⚡'}
+];
+let cur=0,sbOpen=false;
+
+// Filmstrip
+const fs=document.getElementById('fs');
+for(let i=0;i<120;i++){const d=document.createElement('div');d.className='fh';fs.appendChild(d);}
+
+// Nav
+const ni=document.getElementById('ni');
+SLIDES.forEach((s,i)=>{
+  const d=document.createElement('div');d.className='nv'+(i===0?' on':'');
+  d.innerHTML=`<span class="nv-n">${String(i+1).padStart(2,'0')}</span><span class="nv-l">${s.i} ${s.t}</span>`;
+  d.onclick=()=>goTo(i);
+  ni.appendChild(d);
+});
+
+function updateUI(){
+  document.querySelectorAll('.slide').forEach((s,i)=>{
+    s.classList.remove('active','prev');
+    if(i===cur)s.classList.add('active');
+    else if(i<cur)s.classList.add('prev');
+  });
+  document.querySelectorAll('.nv').forEach((item,i)=>item.classList.toggle('on',i===cur));
+  document.getElementById('pf').style.width=(cur/(SLIDES.length-1)*100)+'%';
+  document.getElementById('ctr').textContent=String(cur+1).padStart(2,'0')+'/'+SLIDES.length;
+  // Show back-to-method pill on slides 3–9 (index 2–8)
+  const pill=document.getElementById('back-pill');
+  pill.classList.toggle('vis', cur>=2);
+  setTimeout(()=>{drawMM();drawHub2();},200);
+}
+function goTo(i){cur=Math.max(0,Math.min(SLIDES.length-1,i));updateUI();}
+function nav(d){goTo(cur+d);}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')nav(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')nav(-1);
+});
+
+function toggleSb(){
+  sbOpen=!sbOpen;
+  document.getElementById('sb').classList.toggle('open',sbOpen);
+  document.getElementById('sw').classList.toggle('open',sbOpen);
+  document.getElementById('sbtog').textContent=sbOpen?'✕':'☰';
+}
+
+// Mind Map
+const MM_DATA=[
+  {idx:2,desc:'<strong>📋 Le Séquencier</strong> — La carte de votre production. Chaque séquence = 1 lieu (décor) + 1 temps (éclairage). C\'est à partir de lui qu\'on organise <em>tout le reste</em> — et notamment le plan de tournage.',color:'var(--gold)'},
+  {idx:3,desc:'<strong>📝 Le Scénario</strong> — Le <em>fil rouge de tout le projet</em>. Les comédiens l\'apprennent. Le réalisateur s\'y réfère. Le chef op anticipe ses plans. Le monteur vérifie que le projet prévu = le rendu final.',color:'var(--blue)'},
+  {idx:4,desc:'<strong>📐 Le Découpage Technique</strong> — Le film plan par plan : valeur, mouvement, durée, son. ~12 plans par minute. Permet de construire le plan au sol et d\'anticiper toute la mise en place technique.',color:'var(--green)'},
+  {idx:5,desc:'<strong>🗓️ Le Plan de Tournage</strong> — Le calendrier réel. On regroupe les séquences par décor (pas par ordre du film). Construit à partir du séquencier + dépouillement.',color:'var(--gold)'},
+  {idx:6,desc:'<strong>🗺️ Plan au Sol → Caméra → Lumière → Son</strong> — L\'ordre d\'installation sur le plateau. Le plan au sol détermine tout le reste. Toujours dans cet ordre.',color:'var(--red)'},
+  {idx:7,desc:'<strong>📦 Préparer son matériel</strong> — La veille du tournage : batteries, cartes SD, son testé, décors prêts. Zéro improvisation le jour J.',color:'var(--purple)'},
+];
+
+function mmClick(idx,el){
+  document.querySelectorAll('.mm-node').forEach(n=>n.classList.remove('on'));
+  el.classList.add('on');
+  const d=MM_DATA[idx];
+  document.getElementById('mm-detail').innerHTML=d.desc+`<br><span class="mm-go" onclick="goTo(${d.idx})">Voir cette partie →</span>`;
+}
+
+function drawMM(){
+  const svg=document.getElementById('mmsvg');
+  const map=document.getElementById('mmap');
+  if(!svg||!map)return;
+  svg.innerHTML='';
+  const ctr=map.querySelector('.mm-center');
+  if(!ctr)return;
+  const mr=map.getBoundingClientRect();
+  const cr=ctr.getBoundingClientRect();
+  const cx=(cr.left+cr.right)/2-mr.left;
+  const cy=(cr.top+cr.bottom)/2-mr.top;
+  // scale to viewBox 440x320
+  const scx=440/mr.width,scy=320/mr.height;
+  map.querySelectorAll('.mm-node').forEach(n=>{
+    const box=n.querySelector('.mm-box');
+    if(!box)return;
+    const br=box.getBoundingClientRect();
+    const bx=((br.left+br.right)/2-mr.left)*scx;
+    const by=((br.top+br.bottom)/2-mr.top)*scy;
+    const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1',cx*scx);line.setAttribute('y1',cy*scy);
+    line.setAttribute('x2',bx);line.setAttribute('y2',by);
+    line.setAttribute('stroke','rgba(242,169,0,0.22)');line.setAttribute('stroke-width','1.5');
+    line.setAttribute('stroke-dasharray','5,4');
+    svg.appendChild(line);
+  });
+}
+
+// Hub2 (Scénario slide)
+const HUB_D2={
+  comediens:'<strong>🎭 Comédiens</strong> — Ils apprennent leurs dialogues, comprennent leurs intentions de jeu et préparent leurs répétitions avec le scénario comme partition.',
+  real:'<strong>🎬 Réalisateur</strong> — Il s\'y réfère en permanence pour maintenir la cohérence artistique du projet, du premier jour de tournage au dernier.',
+  chefop:'<strong>📷 Chef Op.</strong> — Il anticipe les valeurs de plan, comprend la lumière narrative, identifie les contraintes techniques scène par scène.',
+  son:'<strong>🎙️ Preneur de son</strong> — Il identifie les sons clés, les ambiances, les moments de silence, les dialogues difficiles à capter selon les lieux.',
+  scripte:'<strong>📋 Scripte</strong> — Il vérifie les raccords entre séquences, contrôle la continuité, note tout pour que le montage soit possible.',
+  monteur:'<strong>✂️ Monteur</strong> — Il vérifie que le projet tel qu\'il a été écrit correspond bien à ce qu\'on a tourné. C\'est la référence finale du projet.',
+};
+function hubInfo(key){
+  document.getElementById('hub-d2').innerHTML=HUB_D2[key];
+}
+function drawHub2(){
+  const svg=document.getElementById('hubsvg2');
+  const wrap=svg?svg.parentElement:null;
+  if(!svg||!wrap)return;
+  svg.innerHTML='';
+  const ctr=wrap.querySelector('[style*="border-radius:50%"]');
+  if(!ctr)return;
+  const wr=wrap.getBoundingClientRect();
+  const cr=ctr.getBoundingClientRect();
+  const cx=(cr.left+cr.right)/2-wr.left;
+  const cy=(cr.top+cr.bottom)/2-wr.top;
+  const scx=640/wr.width,scy=280/wr.height;
+  wrap.querySelectorAll('.hub-n').forEach(n=>{
+    const box=n.querySelector('[style*="background:var(--card)"]');
+    if(!box)return;
+    const br=box.getBoundingClientRect();
+    const bx=((br.left+br.right)/2-wr.left)*scx;
+    const by=((br.top+br.bottom)/2-wr.top)*scy;
+    const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1',cx*scx);line.setAttribute('y1',cy*scy);
+    line.setAttribute('x2',bx);line.setAttribute('y2',by);
+    line.setAttribute('stroke','rgba(242,169,0,0.2)');line.setAttribute('stroke-width','1');
+    line.setAttribute('stroke-dasharray','4,4');
+    svg.appendChild(line);
+  });
+}
+
+// Shot strip
+const SHOT_D=[
+  '<strong>Plan Large (PL)</strong> — Situe le décor et les personnages dans leur environnement. Ouvre généralement une séquence. → Position caméra ① dans le plan au sol (loin, champ large).',
+  '<strong>Plan Moyen (PM)</strong> — Corps entier du personnage. Montre l\'action et les relations. Plan très polyvalent pour le jeu.',
+  '<strong>Plan Américain (PA)</strong> — Coupe à <em>mi-cuisse</em>. Gestes + expressions. Plan dialogue dynamique (westerns, séries). → Position caméra ② dans le plan au sol.',
+  '<strong>Plan Épaule (PE)</strong> — Coupe à <em>hauteur d\'épaule / poitrine</em>. Centré sur le visage et la réaction. Idéal pour interviews et échanges.',
+  '<strong>Gros Plan (GP)</strong> — Visage uniquement. Émotion pure, intensité dramatique. Puissant — à doser. → Position caméra ③ dans le plan au sol (proche, champ étroit).',
+  '<strong>Insert</strong> — Un détail : main, objet, regard. Donne de l\'info au spectateur ou crée du rythme au montage. Ex : le téléphone dans la main, la carte posée sur la table.',
+];
+function showShot(i,el){
+  document.querySelectorAll('.shot-card').forEach(s=>{s.style.borderColor='var(--border)';});
+  el.style.borderColor='var(--gold)';
+  document.getElementById('shot-d').innerHTML=SHOT_D[i];
+}
+
+// Piège tabs
+function pTab(btn,id){
+  btn.closest('.slide').querySelectorAll('.ptab').forEach(b=>b.classList.remove('on'));
+  btn.closest('.slide').querySelectorAll('.ptabcnt').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById(id).classList.add('on');
+}
+
+// Checklist
+function toggleChk(item){
+  const b=item.querySelector('.chkb');
+  b.classList.toggle('on');
+  b.textContent=b.classList.contains('on')?'✓':'';
+}
+
+// Storyboard tabs
+function showSbTab(idx,btn){
+  document.getElementById('sb-tab0').style.display=idx===0?'block':'none';
+  document.getElementById('sb-tab1').style.display=idx===1?'block':'none';
+  ['sbt0','sbt1'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    el.style.borderBottomColor=i===idx?'var(--gold)':'transparent';
+    el.style.color=i===idx?'var(--gold)':'var(--muted)';
+  });
+}
+
+// Scénario tabs
+function showScTab(idx,btn){
+  document.getElementById('sc-tab0').style.display=idx===0?'block':'none';
+  document.getElementById('sc-tab1').style.display=idx===1?'block':'none';
+  ['sct0','sct1'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    el.style.borderBottomColor=i===idx?'var(--gold)':'transparent';
+    el.style.color=i===idx?'var(--gold)':'var(--muted)';
+  });
+}
+
+// Plan de tournage tabs
+function showPtTab(idx,btn){
+  document.getElementById('pt-tab0').style.display=idx===0?'block':'none';
+  document.getElementById('pt-tab1').style.display=idx===1?'block':'none';
+  ['ptt0','ptt1'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    el.style.borderBottomColor=i===idx?'var(--gold)':'transparent';
+    el.style.color=i===idx?'var(--gold)':'var(--muted)';
+  });
+}
+
+// Init
+updateUI();
+const obs=new MutationObserver(()=>setTimeout(()=>{drawMM();},250));
+document.querySelectorAll('.slide').forEach(s=>obs.observe(s,{attributes:true,attributeFilter:['class']}));
+window.addEventListener('resize',()=>{drawMM();});
+
+// SWIPE GESTURES (mobile)
+let touchStartX=0,touchStartY=0;
+document.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;touchStartY=e.touches[0].clientY;},{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-touchStartX;
+  const dy=Math.abs(e.changedTouches[0].clientY-touchStartY);
+  if(Math.abs(dx)>50&&dy<60){nav(dx<0?1:-1);}
+},{passive:true});
+</script>
+</body>
+</html>
